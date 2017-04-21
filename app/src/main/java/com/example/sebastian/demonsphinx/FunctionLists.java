@@ -64,104 +64,107 @@ public class FunctionLists extends AppCompatActivity implements VoiceSettings.Us
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                textView.setText(list.get(childPosition).toString());
-                Preferences preferences=new Preferences();
-                if(map.get(list.get(groupPosition)).get(childPosition).toString()=="Głośniej"){
 
-                   // parent.getChildAt(childPosition).setEnabled(false);
-                    SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
-                    String value=sharedPreferences.getString("VolumePlus"," "  );
-                    int value1=sharedPreferences.getInt("VolumePlus1",1  );
-                    Bundle bundle=new Bundle();
-                    bundle.putString("Plus",value);
-                    bundle.putInt("Plus1",value1);
-                    VoiceSettings voiceSettings=new VoiceSettings();
-                    voiceSettings.setArguments(bundle);
+                CaseFunction(map.get(list.get(groupPosition)).get(childPosition).toString());
 
-                    fragmentTransaction.replace(R.id.fragmentVolume,voiceSettings);
-
-                      fragmentTransaction.addToBackStack(null).commit();
-
-
-                }
-                 if(map.get(list.get(groupPosition)).get(childPosition).toString()=="Ciszej"){
-                     fragmentManager.popBackStack();
-                    SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
-                    String value=sharedPreferences.getString("VolumeMinus"," "  );
-                    int value1=sharedPreferences.getInt("VolumeMinus1",1  );
-                    Bundle bundle=new Bundle();
-                    bundle.putString("Minus",value);
-                    bundle.putInt("Minus1",value1);
-                   VolumeMinus volumeMinus=new VolumeMinus();
-                   volumeMinus.setArguments(bundle);
-
-                    fragmentTransaction1.replace(R.id.fragmentVolume,volumeMinus);
-                     fragmentTransaction1.addToBackStack(null).commit();
-
-
-
-                }
-                 if(map.get(list.get(groupPosition)).get(childPosition).toString()=="Jaśniej"){
-
-                    SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
-                    String value=sharedPreferences.getString("BrightnesPlus"," "  );
-                    int value1=sharedPreferences.getInt("BrightnesPlus1",1  );
-                    Bundle bundle=new Bundle();
-                    bundle.putString("BPlus",value);
-                   bundle.putInt("BPlus1",value1);
-                    BrightnesPlus brightnesPlus=new BrightnesPlus();
-                    brightnesPlus.setArguments(bundle);
-
-                    fragmentTransaction3.replace(R.id.fragmentVolume,brightnesPlus);
-                    fragmentTransaction3.commit();
-
-
-                }
-                if(map.get(list.get(groupPosition)).get(childPosition).toString()=="Ciemniej"){
-
-                   // SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
-                   // String value=sharedPreferences.getString("BrightnesMinus"," "  );
-                   // int value1=sharedPreferences.getInt("BrightnesMinus1",1  );
-                    Bundle bundle=new Bundle();
-                   // bundle.putString("BrightnesMinus",value);
-                   // bundle.putInt("BrightnesMinus1",value1);
-                    BrightnesMinus brightnesMinus=new BrightnesMinus();
-                   // brightnesMinus.setArguments(bundle);
-
-                    fragmentTransaction4.replace(R.id.fragmentVolume,brightnesMinus);
-                    fragmentTransaction4.commit();
-
-
-                }
-               if(map.get(list.get(groupPosition)).get(childPosition).toString()=="Zadzwoń"){
-
-                    SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
-                    String value=sharedPreferences.getString("Call"," "  );
-                    Bundle bundle=new Bundle();
-                    bundle.putString("Call",value);
-                   Call call=new Call();
-                    call.setArguments(bundle);
-
-                    fragmentTransaction2.replace(R.id.fragmentVolume,call);
-                    fragmentTransaction2.commit();
-
-
-                }
 
                 return true;
                  }
                });
          }
+public void  CaseFunction(String field){
+    if(field.equals("Głośniej")){
 
+
+        SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
+        String value=sharedPreferences.getString("VolumePlus"," "  );
+        int value1=sharedPreferences.getInt("VolumePlus1",1  );
+        Bundle bundle=new Bundle();
+        bundle.putString("Plus",value);
+        bundle.putInt("Plus1",value1);
+        VoiceSettings voiceSettings=new VoiceSettings();
+        voiceSettings.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.fragmentVolume,voiceSettings);
+
+        fragmentTransaction.addToBackStack(null).commit();
+
+
+    }
+    if(field.equals("Ciszej")){
+        fragmentManager.popBackStack();
+        SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
+        String value=sharedPreferences.getString("VolumeMinus"," "  );
+        int value1=sharedPreferences.getInt("VolumeMinus1",1  );
+        Bundle bundle=new Bundle();
+        bundle.putString("Minus",value);
+        bundle.putInt("Minus1",value1);
+        VolumeMinus volumeMinus=new VolumeMinus();
+        volumeMinus.setArguments(bundle);
+
+        fragmentTransaction1.replace(R.id.fragmentVolume,volumeMinus);
+        fragmentTransaction1.addToBackStack(null).commit();
+
+
+
+    }
+    if(field.equals("Jaśniej")){
+
+        SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
+        String value=sharedPreferences.getString("BrightnesPlus"," "  );
+        int value1=sharedPreferences.getInt("BrightnesPlus1",1  );
+        Bundle bundle=new Bundle();
+        bundle.putString("BPlus",value);
+        bundle.putInt("BPlus1",value1);
+        BrightnesPlus brightnesPlus=new BrightnesPlus();
+        brightnesPlus.setArguments(bundle);
+
+        fragmentTransaction3.replace(R.id.fragmentVolume,brightnesPlus);
+        fragmentTransaction3.commit();
+
+
+    }
+    if(field.equals("Ciemniej")){
+
+         SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
+         String value=sharedPreferences.getString("BrightnesMinus"," "  );
+         int value1=sharedPreferences.getInt("BrightnesMinus1",1  );
+        Bundle bundle=new Bundle();
+         bundle.putString("BrightnesMinus",value);
+         bundle.putInt("BrightnesMinus1",value1);
+        BrightnesMinus brightnesMinus=new BrightnesMinus();
+         brightnesMinus.setArguments(bundle);
+
+        fragmentTransaction4.replace(R.id.fragmentVolume,brightnesMinus);
+        fragmentTransaction4.commit();
+
+
+    }
+    if(field.equals("Zadzwoń")){
+
+        SharedPreferences sharedPreferences= getSharedPreferences("Settings",MODE_PRIVATE);
+        String value=sharedPreferences.getString("Call"," "  );
+        Bundle bundle=new Bundle();
+        bundle.putString("Call",value);
+        Call call=new Call();
+        call.setArguments(bundle);
+
+        fragmentTransaction2.replace(R.id.fragmentVolume,call);
+        fragmentTransaction2.commit();
+
+
+    }
+
+}
     public  void FillData(){
         list=new ArrayList<>();
         map=new HashMap<>();
 
         list.add("Telefon");
-        list.add("Komputer");
+
 
         List<String> Telephon=new ArrayList<>();
-        List<String> Computer=new ArrayList<>();
+
 
         Telephon.add("Głośniej");
         Telephon.add("Ciszej");
@@ -169,12 +172,10 @@ public class FunctionLists extends AppCompatActivity implements VoiceSettings.Us
         Telephon.add("Cemniej");
         Telephon.add("Zadzwoń");
 
-        Computer.add("Uruchom skrypt");
-        Computer.add("Uruchom Przeglądarkę");
-        Computer.add("Otwórz");
+
 
         map.put(list.get(0),Telephon);
-        map.put(list.get(1),Computer);
+
 
     }
 

@@ -4,17 +4,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/main"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/main" />
+            android:icon="@drawable/ic_home"
+            android:title="Panel Główny" />
 
         <item
             android:id="@+id/connections"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/connections" />
+            android:title="Nowe Połączenie" />
         <item
             android:id="@+id/voice"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/speak" />
+            android:title="Ustawienia" />
 
     </group>
 
