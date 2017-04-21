@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hubertstpiski.speak1.EditSettings.BrightnesMinus">
+
+
+    <TextView
+        android:text="Panel Edycji zmniejszenia jasności"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView24"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView24"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp"
+        android:id="@+id/textView25" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView25"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="94dp"
+        android:id="@+id/textView26" />
+
+    <TextView
+        android:text="Aktualne Ustawienia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView27"
+        android:layout_below="@+id/textView25"
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|italic" />
+
+    <Button
+        android:text="Zapisz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView27"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:id="@+id/button6" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textView27"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp"
+        android:id="@+id/editText11"
+        android:hint="Wpisz słowo kluczowe" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_alignBottom="@+id/editText11"
+        android:layout_toEndOf="@+id/editText11"
+        android:id="@+id/editText12"
+        android:hint="O ie %"
+        android:textAlignment="center"
+        android:layout_alignStart="@+id/button6" />
+</RelativeLayout>

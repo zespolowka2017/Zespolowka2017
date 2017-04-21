@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="TorC">
+        <item >  </item>
+        <item> Telefon</item>>
+        <item >Komputer</item>
+
+
+
+    </string-array>
+    <string-array name="Function">
+        <item>  </item>>
+        <item>Głośniej</item>>
+        <item >Ciszej</item>
+        <item >Ciemniej</item>
+        <item >Jaśniej</item>
+        <item >Zadzwoń</item>
+
+
+    </string-array>
+    
+    
+    
+    
+</resources>

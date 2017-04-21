@@ -1,0 +1,8 @@
+#JSGF V1.0;
+
+grammar devices;
+
+<device> = komputer   |
+          telefon     ;
+
+public <devices> = <device>+;

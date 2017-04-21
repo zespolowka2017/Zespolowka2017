@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hubertstpiski.speak1.Connections"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint="Wprowadż mac adres"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/ip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_marginTop="33dp"
+        android:id="@+id/editText3"
+        android:textAlignment="center"
+        android:hint="Wprowadź nazę urządzenia" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_marginTop="51dp"
+        android:id="@+id/editText4"
+        android:textAlignment="center"
+        android:hint="Wprowadź ..." />
+
+    <Button
+        android:text="Dodaj urządzenie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText4"
+        android:layout_marginTop="49dp"
+        android:id="@+id/add"
+        android:onClick="Add"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint="Wprowadz adres IP"
+        android:id="@+id/ip"
+        android:textSize="14sp"
+        android:textColor="?android:attr/textColorHintInverse"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
+
+</RelativeLayout>

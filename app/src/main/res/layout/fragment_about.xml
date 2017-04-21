@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hubertstpiski.speak1.About">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/authors"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:text="Katarzyna Wittkowska"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:gravity="left"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Mateusz Markuszewski"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:gravity="left"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Sebastian Straszewski"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:gravity="left"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Dawid Szczupakowski"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:gravity="left"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Hubert Stępiński"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:gravity="left"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Krystian Rudziński"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7"
+            android:gravity="left"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:text=" Wersja: 1.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:textSize="30dp"
+        android:textStyle="normal|bold|italic"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="113dp" />
+
+    <TextView
+        android:text="Autorzy:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:id="@+id/authors"
+        android:layout_marginTop="10dp"
+        android:textStyle="normal|bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginStart="78dp" />
+
+</RelativeLayout>
