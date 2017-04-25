@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sebastian.demonsphinx.Settings.Preferences;
+
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
     EditText text;
-    Preferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        preferences=new Preferences();
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.voice) {
             setTitle("Ustawienia Głosowe");
          //   VoiceSettings voiceSettings = new VoiceSettings();
-            Intent intent=new Intent(MainActivity.this,FunctionLists.class);
+            Intent intent=new Intent(MainActivity.this,DisplayOptions.class);
             startActivity(intent);
            /* FunctionList functionList=new FunctionList();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
