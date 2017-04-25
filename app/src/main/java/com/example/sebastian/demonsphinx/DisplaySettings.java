@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 public class DisplaySettings extends AppCompatActivity {
 
-    private TextView txt1,txt2,txt3;
+    private TextView txt1,txt2,txt3,txt4;
     private Button save;
-    private EditText eValue,eValue1;
+    private EditText eValue,eValue1,eValue2,eValue3;
     private int key;
 
     SharedPreferences sharedPreferences;
@@ -31,14 +31,17 @@ public class DisplaySettings extends AppCompatActivity {
         /**
          * Przypisanie referencji do pol tekstowych
          */
-        txt1 = (TextView) findViewById(R.id.STitle);
+     //   txt1 = (TextView) findViewById(R.id.STitle);
         txt2 = (TextView) findViewById(R.id.value);
         txt3= (TextView) findViewById(R.id.value1);
+        txt4=(TextView) findViewById(R.id.value3);
          /**
           * Przypisanie referencji do edytowalnych pol tekstowych
         */
         eValue = (EditText) findViewById(R.id.setValue);
         eValue1 = (EditText) findViewById(R.id.setValue1);
+        eValue2 = (EditText) findViewById(R.id.setValue2);
+        eValue3 = (EditText) findViewById(R.id.setValue3);
 
         /**
          * Inicjaizacja przycisku odpowiadajacego za zapis wprowadzonych danych
@@ -50,55 +53,106 @@ public class DisplaySettings extends AppCompatActivity {
         key = getIntent().getIntExtra("key", 0);
         if (key == 0) {
             setTitle("Zmniejszenie jasności");
-            txt1.setText("Panel Edycji Zmniejszenia Jasności");
             txt2.setText(sharedPreferences.getString("BrightnesMinus", " ").toString());
-            txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesMinus1", 1)));
-
+            txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesMinus1", 1))+ "%");
+            txt4.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
         }
         else if (key == 1) {
             setTitle("Zwiększenie jasności");
-            txt1.setText("Panel Edycji Zwiększenia Jasności");
             txt2.setText(sharedPreferences.getString("BrightnesPlus", " ").toString());
-            txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesPlus1", 1)));
+            txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesPlus1", 1))+"%");
+            txt4.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
 
         }
         else if (key == 2) {
-            setTitle("Zmaina trybu dźwięku");
-            txt1.setText("Zmiana Trybu");
+            setTitle("Zmaina trybu telefonu");
             txt2.setText(sharedPreferences.getString("VolumePlus", " ").toString());
 
             eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
             txt3.setVisibility(View.INVISIBLE);
+            txt4.setVisibility(View.INVISIBLE);
 
 
         }
         else if (key == 3) {
-            setTitle("Zmiana trybu dzwięku");
-            txt1.setText("Zmiana Trybu Do Wibracji");
+            setTitle("Zmiana trybu telefonu");
+
             txt2.setText(sharedPreferences.getString("VolumeMinus", " ").toString());
 
             eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
             txt3.setVisibility(View.INVISIBLE);
+            txt4.setVisibility(View.INVISIBLE);
 
 
         }
         else if (key == 4) {
             setTitle("Połączenia głosowe");
-            txt1.setText("Wykonanie Połączenia");
+
             txt2.setText(sharedPreferences.getString("Call", " ").toString());
 
             eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
             txt3.setVisibility(View.INVISIBLE);
+            txt4.setVisibility(View.INVISIBLE);
 
 
         }
         else if (key == 5) {
             setTitle("Przeglądarka");
-            txt1.setText("Otworzenie przeglądarki");
+
             txt2.setText(sharedPreferences.getString("Browser", " ").toString());
 
             eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
             txt3.setVisibility(View.INVISIBLE);
+            txt4.setVisibility(View.INVISIBLE);
+
+
+        }
+        else if (key == 6) {
+            setTitle("MultimediaPlus");
+
+            txt2.setText(sharedPreferences.getString("Multimedia", " ").toString());
+            txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia1", 1)));
+            txt3.setText(sharedPreferences.getString("Multimedia2", " ").toString());
+
+            eValue1.setVisibility(View.INVISIBLE);
+
+
+
+        }
+        else if (key == 7) {
+            setTitle("MultimediaMinus");
+
+            txt2.setText(sharedPreferences.getString("Multimedia", " ").toString());
+            txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia4", 1)));
+            txt3.setText(sharedPreferences.getString("Multimedia3", " ").toString());
+
+            eValue1.setVisibility(View.INVISIBLE);
+
+
+
+        }
+        else if (key == 8) {
+            setTitle("Aparat");
+            txt2.setText(sharedPreferences.getString("Foto", " ").toString());
+
+            eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setVisibility(View.INVISIBLE);
+            eValue3.setVisibility(View.INVISIBLE);
+            txt3.setVisibility(View.INVISIBLE);
+            txt4.setVisibility(View.INVISIBLE);
+
 
 
         }
@@ -182,6 +236,39 @@ public class DisplaySettings extends AppCompatActivity {
                     }
 
                 }
+                else if(key==6){
+                   // if(eValue.getText().toString().isEmpty())
+                   // {
+                        Toast.makeText(getBaseContext(),"Pole jest puste. Wpisz wartość.",Toast.LENGTH_LONG).show();
+                    //}
+                   // else{
+                        addSettings(eValue.getText().toString(),eValue2.getText().toString(),Integer.parseInt(eValue3.getText().toString()),"Multimedia","Multimedia1","Multimedia2");
+                        eValue.setText(" ");
+                   // }
+
+                }
+                else if(key==7){
+                    // if(eValue.getText().toString().isEmpty())
+                    // {
+                    Toast.makeText(getBaseContext(),"Pole jest puste. Wpisz wartość.",Toast.LENGTH_LONG).show();
+                    //}
+                    // else{
+                    addSettings(eValue.getText().toString(),eValue2.getText().toString(),Integer.parseInt(eValue3.getText().toString()),"Multimedia","Multimedia4","Multimedia3");
+                    eValue.setText(" ");
+                    // }
+
+                }
+                else if(key==8){
+                     if(eValue.getText().toString().isEmpty())
+                     {
+                    Toast.makeText(getBaseContext(),"Pole jest puste. Wpisz wartość.",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                    addSettings(eValue.getText().toString(),"Foto");
+                    eValue.setText(" ");
+                     }
+
+                }
 
             }
         });
@@ -207,8 +294,19 @@ private void addSettings(String value,int value1,String key,String key1) {
         Toast.makeText(getBaseContext(),"Ustawienia Zapisane Pomyślnie",Toast.LENGTH_LONG).show();
 
     }
+    private void addSettings(String value,String value2 ,int value1,String key,String key1,String key2) {
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(key, value);
+        editor.putString(key2, value2);
+        editor.putInt(key1, value1);
+        editor.apply();
+        Toast.makeText(getBaseContext(),"Ustawienia Zapisane Pomyślnie",Toast.LENGTH_LONG).show();
     }
+
+
+}
 
 
 

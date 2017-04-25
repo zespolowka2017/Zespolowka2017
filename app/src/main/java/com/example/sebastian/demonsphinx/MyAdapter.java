@@ -84,6 +84,12 @@ public class MyAdapter extends RecyclerView.Adapter {
                     else if(position==6){
                         intent.putExtra("key",6);
                     }
+                    else if(position==7){
+                        intent.putExtra("key",7);
+                    }
+                    else if(position==8){
+                        intent.putExtra("key",8);
+                    }
                 context.startActivity(intent);
 
             }

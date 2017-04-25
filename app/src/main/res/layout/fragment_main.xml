@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hubertstpiski.speak1.Main">
+    android:background="#303030"
+    tools:context="com.example.sebastian.demonsphinx.Main">
 
     <!-- TODO: Update blank fragment layout -->
 

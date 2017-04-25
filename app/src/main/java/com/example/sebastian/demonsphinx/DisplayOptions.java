@@ -33,8 +33,13 @@ public class DisplayOptions extends AppCompatActivity {
             articles.add(new NameOfOptions("Zwiększenie Jasności","Opcja pozwalająca na edycję słowa kluczowego dla zwiększenia jasności ekranu telefonu"));
             articles.add(new NameOfOptions("Zmiana Trybu","Opcja pozwalająca na edycję słowa kluczowego dla zmainy trybu dzwiękowego telefonu (podgłoszenie)"));
             articles.add(new NameOfOptions("Zmiana Trybu do wibracji","Opcja pozwalająca na edycję słowa kluczowego dla zmainy trybu dzwiękowego telefonu (przyciszanie)"));
-        articles.add(new NameOfOptions("Wykonanie Telefonu","Opcja pozwalająca na edycję słowa kluczowego dla wykonania połączenia telefonicznego"));
+        articles.add(new NameOfOptions("Połączenie Głosowe","Opcja pozwalająca na edycję słowa kluczowego dla wykonania połączenia telefonicznego"));
         articles.add(new NameOfOptions("Przeglądarka","Opcja pozwalająca na edycję słowa kluczowego dla uruchomienia przeglądarki www"));
+        articles.add(new NameOfOptions("Zmiejszenie poziomu dzwięku mediów","Opcja pozwalająca na edycję słowa kluczowego dla zmniejsenia głośności mediów wraz z jej procentową wartością."));
+        articles.add(new NameOfOptions("Zwiększenie poziomu dzwięku mediów","Opcja pozwalająca na edycję słowa kluczowego dla zwiększenia głośności mediów wraz z jej procentową wartością."));
+        articles.add(new NameOfOptions("Aparat","Opcja pozwalająca na edycję słowa kluczowego dla uruchomienia aparatu."));
+
+
 
         // tworzymy adapter oraz łączymy go z RecyclerView
         recyclerView.setAdapter(new MyAdapter(articles, recyclerView));

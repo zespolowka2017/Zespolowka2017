@@ -31,10 +31,13 @@ public class New_Intent extends Activity {
 	private ContentResolver cResolver;
 	private Window window;
     private String[] order = new String[7];
-    private int percentagePower;
+    private int percentagePowerPlus;
+    private int percentagePowerMinus;
     private int percentageBrightnessMore;
     private int percentageBrightnessLess;
     private String player;
+    private String vPlus;
+    private String vMinus;
     private String value;
     private int value1;
 
@@ -46,7 +49,7 @@ public class New_Intent extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences("Settings",MODE_PRIVATE);
 
        // Tutaj bedzie odczyt ustawien
-        order[0] = "zadzwoń";//sharedPreferences.getString("Call", " ").toLowerCase();
+        order[0] = sharedPreferences.getString("Call", " ").toLowerCase();
 
         order[1] = sharedPreferences.getString("BrightnesPlus", " ").toLowerCase();
         //ile procent jasnosci ekranu proponuj�, �eby na sztywno by�o narzucone,�e wielokrotno�� 5
@@ -59,12 +62,17 @@ public class New_Intent extends Activity {
 
         order[4] = sharedPreferences.getString("VolumePlus"," "  ).toLowerCase();
 
-        order[5] = sharedPreferences.getString("Aparat"," "  ).toLowerCase();
+        order[5] = sharedPreferences.getString("Foto"," "  ).toLowerCase();
 
         order[6] = sharedPreferences.getString("Browser"," "  ).toLowerCase();
 
         player = sharedPreferences.getString("Multimedia"," "  ).toLowerCase();
-        percentagePower = sharedPreferences.getInt("Multimedia1",1  );
+
+        vPlus=sharedPreferences.getString("Multimedia2"," "  ).toLowerCase();
+        vMinus=sharedPreferences.getString("Multimedia3"," "  ).toLowerCase();
+
+        percentagePowerPlus = sharedPreferences.getInt("Multimedia1",1  );
+        percentagePowerMinus = sharedPreferences.getInt("Multimedia4",1  );
 
         Bundle b = getIntent().getExtras();
         command = b.getString("Polecenie");
@@ -92,11 +100,11 @@ public class New_Intent extends Activity {
         else if(tab[0].equals(order[4])) {
             louder();
         }
-        else if(tab[0].equals(player) && tab[1].equals(order[4])) {
-            playerLouder(percentagePower);
+        else if(tab[0].equals(player) && tab[1].equals(vPlus)) {
+            playerLouder(percentagePowerPlus);
         }
-        else if(tab[0].equals(player) && tab[1].equals(order[3])) {
-            playerQuieter(percentagePower);
+        else if(tab[0].equals(player) && tab[1].equals(vMinus)) {
+            playerQuieter(percentagePowerMinus);
         }
         else if(tab[0].equals(order[5])) {
             foto();
