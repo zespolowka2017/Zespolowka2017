@@ -2,6 +2,7 @@ package com.example.sebastian.demonsphinx;
 
 
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
@@ -24,7 +26,8 @@ import java.util.ArrayList;
  */
 public class Main extends Fragment {
 
-
+ImageView imageView;
+    boolean turnOn=false;
     public Main() {
        // Required empty public constructor
     }
@@ -42,6 +45,7 @@ public class Main extends Fragment {
         computerLists.add(comp1);
         computerLists.add(comp2);
         computerLists.add(comp3);
+
 
 
         final BindDictionary<ComputerList> dictionary=new BindDictionary<>();
@@ -70,6 +74,8 @@ public class Main extends Fragment {
                 dictionary);
 
         View view= inflater.inflate(R.layout.fragment_main, container, false);
+
+        imageView= (ImageView) view.findViewById(R.id.imageView2);
         ListView compuerList=(ListView)view.findViewById(R.id.computerList);
         compuerList.setAdapter(adapter);
 
@@ -92,12 +98,21 @@ public class Main extends Fragment {
 //                } else {
 //                    getActivity().stopService(new Intent(getActivity(),ListenService.class));
 //                }
+
                 Intent serviceIntent = new Intent(buttonView.getContext(), ListenService.class);
 
                 if(isChecked) {
+                    imageView.setImageResource(R.drawable.transitionon);
+                    ((TransitionDrawable) imageView.getDrawable()).startTransition(2000);
+
                     getActivity().startService(serviceIntent);
+
                 } else {
+                    imageView.setImageResource(R.drawable.transitionoff);
+                    ((TransitionDrawable) imageView.getDrawable()).startTransition(2000);
+
                     getActivity().stopService(serviceIntent);
+
                 }
             }
         });
