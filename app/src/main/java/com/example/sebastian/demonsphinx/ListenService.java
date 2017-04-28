@@ -17,6 +17,8 @@ import android.widget.Toast;
 public class ListenService extends Service {
     private SphinxRecogniser sphinxRecognise;
 
+    private Connection con;
+
     /**
      * Nazwa broadcastu dzieki ktoremu dowiadujemy sie o statusie serwisu.
      */
@@ -61,6 +63,8 @@ public class ListenService extends Service {
         // przeslanie statusu serwisu
         sendResult("Service started");
 
+        con = new Connection("10.10.252.8");
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -72,6 +76,9 @@ public class ListenService extends Service {
 
         // wyrejestrowanie Broadcastu sluzacego do otrzymywania wiadomosci z GoogleRecogniser
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+
+        // zerwanie polaczenia
+        con.disconnect();
 
         // przeslanie statusu serwisu
         sendResult("Service stopped");
@@ -101,13 +108,18 @@ public class ListenService extends Service {
             String[] parts = message.split(";;");
 
             if(parts.length > 1) {
-                Toast.makeText(context, parts[0] + " 99999 " + parts[1], Toast.LENGTH_SHORT).show();
-                Intent new_intent = new Intent();
-                new_intent.putExtra("Polecenie", parts[1]);
-                new_intent.setClass(context, New_Intent.class);
+                Toast.makeText(context, parts[0], Toast.LENGTH_SHORT).show();
+                if(parts[0].equals("Telefon")) {
+                    Intent new_intent = new Intent();
+                    new_intent.putExtra("Polecenie", parts[1]);
+                    new_intent.setClass(context, New_Intent.class);
 
-                new_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(new_intent);
+                    new_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(new_intent);
+                }
+                else {
+                    con.send(parts[1].toLowerCase());
+                }
             }
 
 

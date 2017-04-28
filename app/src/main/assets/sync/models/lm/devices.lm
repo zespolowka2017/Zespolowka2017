@@ -10,8 +10,8 @@ The (fixed) discount mass is 0.5. The backoffs are computed using the ratio meth
 This model based on a corpus of 2 sentences and 4 words
 
 \data\
-ngram 1=4
-ngram 2=4
+ngram 1=2
+ngram 2=2
 ngram 3=2
 
 \1-grams:

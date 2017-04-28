@@ -20,8 +20,8 @@ import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
  * Klasa umozliwiajaca nasluchiwanie na slowo klucz.
  */
 public class SphinxRecogniser implements RecognitionListener {
-    private static final String KWS_SEARCH = "wakeup";
-    private static final String DEVICES_SEARCH = "devices";
+    private static final String KWS_SEARCH = "komputer";
+    private static final String KEYPHRASE = "oh mighty computer";
 
     private Context context;
 
