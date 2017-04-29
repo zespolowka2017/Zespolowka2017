@@ -52,6 +52,9 @@ public class ListenService extends Service {
         TelephonyManager manager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         manager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
+
+        con = new Connection("10.10.252.8");
+
         // rozpoczecie nasluchiwania na slowo klucz
         sphinxRecognise = new SphinxRecogniser(this);
     }
@@ -62,8 +65,6 @@ public class ListenService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // przeslanie statusu serwisu
         sendResult("Service started");
-
-        con = new Connection("10.10.252.8");
 
         return super.onStartCommand(intent, flags, startId);
     }

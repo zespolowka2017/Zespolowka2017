@@ -47,7 +47,6 @@ ImageView imageView;
         computerLists.add(comp3);
 
 
-
         final BindDictionary<ComputerList> dictionary=new BindDictionary<>();
         dictionary.addStringField(R.id.compName, new StringExtractor<ComputerList>() {
             @Override
