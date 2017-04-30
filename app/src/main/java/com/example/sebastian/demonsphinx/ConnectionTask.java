@@ -1,5 +1,4 @@
-package com.example.sebastian.demonsphinx;
-
+package com.example.asddda;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -22,16 +21,14 @@ public class ConnectionTask extends AsyncTask<Void, Void, Void>{
 	public ConnectionTask(Connection connect) {
         connection = connect;
         Random generator = new Random();	 
-        connection.publicKey = generator.nextInt(2000);
-        connection.token = connection.publicKey - connection.privateKey ;
-        
-        
+        connection.publicKey = generator.nextInt(20000);
+        connection.token = connection.publicKey - connection.privateKey ;                
     }
 	
     @Override
     protected void onPreExecute() {
         //okno dialogowe 
-    	//podczas ï¿½ï¿½czenia siï¿½ z serwerem moï¿½na dodaï¿½ okno
+    	//podczas ³¹czenia siê z serwerem mo¿na dodaæ okno
     	//tu Activity.ShowDialog...
     }
 
@@ -45,9 +42,9 @@ public class ConnectionTask extends AsyncTask<Void, Void, Void>{
 				connection.ps = ps;
 				connection.sockIn = connection.socket.getInputStream();
 				Log.d("debug","jestem");
+				ps.println(connection.publicKey);
+				ps.println(connection.token);
 				
-				connection.sockOut.write(connection.publicKey);
-				connection.sockOut.write(connection.token);
 				
 				
 			}catch (UnknownHostException exc) {
@@ -65,7 +62,7 @@ public class ConnectionTask extends AsyncTask<Void, Void, Void>{
 	}
 	@Override
     protected void onPostExecute(Void result) {
-       //tu zamykanie okna ï¿½adowania po poï¿½ï¿½czeniu jesli w onpre cos robione
+       //tu zamykanie okna ³adowania po po³¹czeniu jesli w onpre cos robione
     }
 
 
