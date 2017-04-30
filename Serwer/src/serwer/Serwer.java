@@ -79,24 +79,15 @@ public class Serwer {
                         services.chooseAction(s);
                        
                    }catch(IOException ex){
-                       br.close();
-                       System.out.println("closed");
+                       br.close();                    
                        continue;
                    }catch(NumberFormatException ex){
                        br.close();
-                       System.out.println("closed");
                        continue;
                    }
-                 // System.out.println("br");
-                    /*if(br.ready()){
-                        if(checkToken(Integer.valueOf(br.readLine())))continue;                   
-                        String s = br.readLine();
-                        System.out.println(s);
-                        services.chooseAction(s);
-                    }*/
                 }
                 System.out.println("Disconnected");
-                
+                connection.close();
                         
             }          
         }finally{
