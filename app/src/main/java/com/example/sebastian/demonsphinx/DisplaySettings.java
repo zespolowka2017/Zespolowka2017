@@ -186,6 +186,7 @@ public class DisplaySettings extends AppCompatActivity {
                     {
                         Toast.makeText(getBaseContext(),"Jedno z pół jest puste. Wpisz wartość.",Toast.LENGTH_LONG).show();
                     }
+
                     else{
                         addSettings(eValue.getText().toString(),Integer.parseInt(eValue1.getText().toString()),"BrightnesPlus","BrightnesPlus1");
                         eValue.setText(" ");

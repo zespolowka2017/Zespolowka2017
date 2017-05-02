@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Klasa odpowiedzialna za wyświetlanie widoku fragment_about.xml.
  */
 public class About extends Fragment {
 
@@ -18,7 +18,9 @@ public class About extends Fragment {
         // Required empty public constructor
     }
 
-
+    /**
+     * Metoda wyświetlająca layout.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.PhoneStateListener;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 public class ListenService extends Service {
     private SphinxRecogniser sphinxRecognise;
 
+    SharedPreferences sharedPreferences;
     private Connection con;
 
     /**
@@ -52,8 +54,9 @@ public class ListenService extends Service {
         TelephonyManager manager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         manager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
-
-        con = new Connection("10.10.252.8");
+        sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
+        sharedPreferences.getString("IP","Brak IP");
+        con = new Connection( sharedPreferences.getString("IP","Brak IP").toString());
 
         // rozpoczecie nasluchiwania na slowo klucz
         sphinxRecognise = new SphinxRecogniser(this);

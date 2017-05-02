@@ -17,26 +17,35 @@ public class DatagramSender extends AsyncTask<Integer,Void,List<String>>{
 /*objekt dostaje adress broadcast i wydala liste serwerow nasluchujacych w sieci*/
 
 	@Override
-	protected List<String> doInBackground(Integer... broadcast){
+	protected ArrayList<String> doInBackground(Integer... broadcast){
 		DatagramSocket socket = null;
 		DatagramPacket packet;
 		String s;
-		List<String> ipAdresses = new ArrayList<String>();
+		//ArrayList<NameOfComputers> newlist=new ArrayList<>();
+		ArrayList<String> ipAdresses = new ArrayList<String>();
 		try {
+			Log.d("ip", "blok try ");
 			socket = new DatagramSocket();
 			socket.setBroadcast(true);			
 			byte[] msg = new byte[1];		
 			InetAddress broadcastAddr = InetAddress.getByName(Formatter.formatIpAddress(broadcast[0]));
-			  			
-			packet = new DatagramPacket(msg, msg.length, broadcastAddr, 30111);  
-			socket.send(packet);  
+
+
+
+			packet = new DatagramPacket(msg, msg.length, broadcastAddr, 30111);
+			Log.d("ip", "blok try 2");
+			socket.send(packet);
+
 			socket.setSoTimeout(5000);
-			
+			Log.d("ip", "blok try 3");
 			while(true){			
 				socket.receive(packet);		
-				s=packet.getAddress().toString();
-				Log.d("ip", s);	
-				ipAdresses.add(s);
+				//s=packet.getAddress().toString();
+				String name=packet.getAddress().getHostAddress().toString();
+				//Log.d("ip", s);
+				Log.d("name", name);
+				//newlist.add(new NameOfComputers(name));
+				ipAdresses.add(name);
 			}			
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block

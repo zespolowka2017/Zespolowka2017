@@ -100,11 +100,8 @@ public class MainActivity extends AppCompatActivity
         TextView text = (TextView) findViewById(R.id.info);
         if (id == R.id.connections) {
             setTitle("Połączenia");
-            Connections connections = new Connections();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.
-                    setCustomAnimations(R.anim.screen_anim, R.anim.screen_anim).
-                    replace(R.id.frame, connections).commit();
+            Intent intent=new Intent(MainActivity.this,ConnectionView.class);
+            startActivity(intent);
         } else if (id == R.id.main) {
             setTitle("Panel Główny");
             Main main = new Main();
@@ -163,12 +160,21 @@ public class MainActivity extends AppCompatActivity
                 replace(R.id.frame, main).commit();
     }
 
-SharedPreferences sharedPreferences;
+    @Override
+    protected void onDestroy() {
+        sharedPreferences= getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString("IP"," ");
+        editor.commit();
+        super.onDestroy();
+    }
+
+    SharedPreferences sharedPreferences;
     public void SaveConfiguration(View view) {
         //text= (EditText) findViewById(R.id.editText);
         String name="";
-        sharedPreferences= getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= sharedPreferences.edit();
+
+
 
         //editor.putString("VolumePlus","Głośniej");
         //editor.commit();

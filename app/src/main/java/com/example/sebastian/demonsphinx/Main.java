@@ -1,7 +1,9 @@
 package com.example.sebastian.demonsphinx;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.amigold.fundapter.BindDictionary;
@@ -37,48 +40,22 @@ ImageView imageView;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        final ArrayList<ComputerList> computerLists=new ArrayList<>();
-        ComputerList comp1=new ComputerList("Stacja1","192.168.1.1","aaa:ddad:12fd");
-        ComputerList comp2=new ComputerList("Domowy","192.168.1.22","aaa:00:12fd");
-        ComputerList comp3=new ComputerList("Maniek","192.168.4.12","3ca:df:12fd");
-
-        computerLists.add(comp1);
-        computerLists.add(comp2);
-        computerLists.add(comp3);
 
 
-        final BindDictionary<ComputerList> dictionary=new BindDictionary<>();
-        dictionary.addStringField(R.id.compName, new StringExtractor<ComputerList>() {
-            @Override
-            public String getStringValue(ComputerList computerList, int position) {
-                return computerList.getName();
+        SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
-            }
-        });
-        dictionary.addStringField(R.id.ip, new StringExtractor<ComputerList>() {
-            @Override
-            public String getStringValue(ComputerList computerList, int position) {
-                return "" + computerList.getIp();
-            }
-        });
-        dictionary.addStringField(R.id.mc, new StringExtractor<ComputerList>() {
-            @Override
-            public String getStringValue(ComputerList computerList, int position) {
-                return "" + computerList.getMcAdress();
-            }
-        });
-        FunDapter adapter=new FunDapter(Main.this.getActivity(),
-                computerLists,
-                R.layout.list_look,
-                dictionary);
+
 
         View view= inflater.inflate(R.layout.fragment_main, container, false);
+        TextView textView= (TextView) view.findViewById(R.id.info);
+        textView.setText(sharedPreferences.getString("IP"," ").toString());
+
 
         imageView= (ImageView) view.findViewById(R.id.imageView2);
-        ListView compuerList=(ListView)view.findViewById(R.id.computerList);
-        compuerList.setAdapter(adapter);
+      //  ListView compuerList=(ListView)view.findViewById(R.id.computerList);
+        //compuerList.setAdapter(adapter);
 
-        final ToggleButton tbtn= (ToggleButton) view.findViewById(R.id.connect);
+       /* final ToggleButton tbtn= (ToggleButton) view.findViewById(R.id.connect);
         compuerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,7 +63,7 @@ ImageView imageView;
 
             }
         });
-
+*/
         final ToggleButton btnServiceStartStop = (ToggleButton) view.findViewById(R.id.btnStartStopService);
 
         btnServiceStartStop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
