@@ -67,6 +67,7 @@ public class ConnectionView extends AppCompatActivity {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -74,7 +75,6 @@ public class ConnectionView extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
-
             }
 
         };

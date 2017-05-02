@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,13 @@ ImageView imageView;
 
 
 
-        SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
 
 
         View view= inflater.inflate(R.layout.fragment_main, container, false);
-        TextView textView= (TextView) view.findViewById(R.id.info);
-        textView.setText(sharedPreferences.getString("IP"," ").toString());
+
+
+
 
 
         imageView= (ImageView) view.findViewById(R.id.imageView2);
@@ -64,6 +65,7 @@ ImageView imageView;
             }
         });
 */
+
         final ToggleButton btnServiceStartStop = (ToggleButton) view.findViewById(R.id.btnStartStopService);
 
         btnServiceStartStop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -90,10 +92,19 @@ ImageView imageView;
                     getActivity().stopService(serviceIntent);
 
                 }
+
             }
         });
 
         return view;
-    }
 
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        // put your code here...
+        SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        TextView textView= (TextView) this.getActivity().findViewById(R.id.info);
+        textView.setText(sharedPreferences.getString("IP"," ").toString());
+    }
 }

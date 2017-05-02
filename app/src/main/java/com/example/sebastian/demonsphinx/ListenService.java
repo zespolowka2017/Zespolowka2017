@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class ListenService extends Service {
     private SphinxRecogniser sphinxRecognise;
 
+    private String IP=null;
     SharedPreferences sharedPreferences;
     private Connection con;
 
@@ -55,7 +56,8 @@ public class ListenService extends Service {
         manager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
         sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
-        sharedPreferences.getString("IP","Brak IP");
+
+
         con = new Connection( sharedPreferences.getString("IP","Brak IP").toString());
 
         // rozpoczecie nasluchiwania na slowo klucz

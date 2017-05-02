@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.
                     setCustomAnimations(R.anim.screen_anim, R.anim.screen_anim).
-                    replace(R.id.frame, main).commit();
+                    replace(R.id.frame, main,"Main").commit();
+
         } else if (id == R.id.voice) {
             setTitle("Ustawienia Głosowe");
          //   VoiceSettings voiceSettings = new VoiceSettings();
