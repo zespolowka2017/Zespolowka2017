@@ -1,4 +1,4 @@
-package com.example.sebastian.demonsphinx;
+package com.example.asddda;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -7,45 +7,38 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.os.AsyncTask;
 import android.text.format.Formatter;
 import android.util.Log;
 
-public class DatagramSender extends AsyncTask<Integer,Void,List<String>>{
+public class DatagramSender extends AsyncTask<Integer,Void,Map<String,String>>{
 /*objekt dostaje adress broadcast i wydala liste serwerow nasluchujacych w sieci*/
 
 	@Override
-	protected ArrayList<String> doInBackground(Integer... broadcast){
+	protected Map<String,String> doInBackground(Integer... broadcast){
 		DatagramSocket socket = null;
 		DatagramPacket packet;
 		String s;
-		//ArrayList<NameOfComputers> newlist=new ArrayList<>();
-		ArrayList<String> ipAdresses = new ArrayList<String>();
+		Map<String,String> ipAdresses = new HashMap<String,String>();
 		try {
-			Log.d("ip", "blok try ");
 			socket = new DatagramSocket();
 			socket.setBroadcast(true);			
-			byte[] msg = new byte[1];		
+			byte[] msg = new byte[32];		
 			InetAddress broadcastAddr = InetAddress.getByName(Formatter.formatIpAddress(broadcast[0]));
-
-
-
-			packet = new DatagramPacket(msg, msg.length, broadcastAddr, 30111);
-			Log.d("ip", "blok try 2");
-			socket.send(packet);
-
+			  			
+			packet = new DatagramPacket(msg, msg.length, broadcastAddr, 30111);  
+			socket.send(packet);  
 			socket.setSoTimeout(5000);
-			Log.d("ip", "blok try 3");
+			
 			while(true){			
 				socket.receive(packet);		
-				//s=packet.getAddress().toString();
-				String name=packet.getAddress().getHostAddress().toString();
-				//Log.d("ip", s);
-				Log.d("name", name);
-				//newlist.add(new NameOfComputers(name));
-				ipAdresses.add(name);
+				
+				//System.out.println(new String(packet.getData(), 0, packet.getLength()));
+				ipAdresses.put(packet.getAddress().toString(),new String(packet.getData(), 0, packet.getLength()));
 			}			
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
