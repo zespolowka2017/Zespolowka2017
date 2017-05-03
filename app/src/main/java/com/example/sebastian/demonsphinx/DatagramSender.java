@@ -1,4 +1,4 @@
-package com.example.asddda;
+package com.example.sebastian.demonsphinx;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -33,7 +33,7 @@ public class DatagramSender extends AsyncTask<Integer,Void,Map<String,String>>{
 			packet = new DatagramPacket(msg, msg.length, broadcastAddr, 30111);  
 			socket.send(packet);  
 			socket.setSoTimeout(5000);
-			
+			Log.d("ip","jestem");
 			while(true){			
 				socket.receive(packet);		
 				

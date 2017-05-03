@@ -14,6 +14,12 @@ public class NameOfComputers {
     }
 
     private String ip;
+
+    public String getName() {
+        return name;
+    }
+
+    private String name;
     private int position;
 
     public void setPosition(int position) {
@@ -25,8 +31,9 @@ public class NameOfComputers {
         return position;
     }
 
-    public NameOfComputers(String ip) {
+    public NameOfComputers(String ip,String name) {
         this.ip = ip;
+        this.name=name;
 
     }
 

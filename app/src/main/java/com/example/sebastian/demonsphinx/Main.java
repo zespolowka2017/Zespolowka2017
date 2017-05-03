@@ -105,6 +105,8 @@ ImageView imageView;
         // put your code here...
         SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         TextView textView= (TextView) this.getActivity().findViewById(R.id.info);
+        TextView textView1= (TextView) this.getActivity().findViewById(R.id.conectName);
         textView.setText(sharedPreferences.getString("IP"," ").toString());
+        textView1.setText(sharedPreferences.getString("NAME"," ").toString());
     }
 }

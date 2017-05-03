@@ -8,12 +8,17 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 
 public class ConnectionView extends AppCompatActivity {
@@ -21,7 +26,7 @@ public class ConnectionView extends AppCompatActivity {
     ProgressDialog progressDialog;
     List<String> computer = new ArrayList<>();
     WifiInfo wifiInfo ;
-
+    AdapterDisplayComputers adapter;
     Context context;
     RecyclerView recyclerView;
     ArrayList<NameOfComputers> computerLists;
@@ -51,12 +56,20 @@ public class ConnectionView extends AppCompatActivity {
         Thread t=new Thread(){
             public void run(){
                 try {
+                    Map<String,String> map=new HashMap<String,String>();
+                    map = new DatagramSender().execute(wifiInfo.getBroadcast()).get();
 
-                    computer = new DatagramSender().execute(wifiInfo.getBroadcast()).get();
-                    Iterator<String> iterator = computer.iterator();
-                    while (iterator.hasNext()) {
-                        computerLists.add(new NameOfComputers(iterator.next()));
+                    Iterator myIterator = map.keySet().iterator();
+                    while(myIterator.hasNext()) {
+                        String ip=(String)myIterator.next();
+                        String name=(String)map.get(ip);
+                        computerLists.add(new NameOfComputers(ip.replace("/",""),name));
+                        Log.d("lista1",computerLists.get(0).toString());
+                        Log.d("lista",computerLists.get(0).getIp()+computerLists.get(0).getName());
                     }
+
+
+
 
 
 
@@ -73,17 +86,26 @@ public class ConnectionView extends AppCompatActivity {
                     public void run() {
                         recyclerView.setAdapter(new AdapterDisplayComputers(computerLists, recyclerView));
                         progressDialog.dismiss();
+                        adapter=new AdapterDisplayComputers();
+
                     }
                 });
             }
 
         };
         t.start();
+        if(adapter.click) {
+            SharedPreferences sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
+            editor.putString("IP", adapter.IP);
+            editor.putString("NAME", adapter.Name);
+            editor.apply();
+            Toast.makeText(this, adapter.IP+ adapter.Name, Toast.LENGTH_LONG).show();
+            adapter.click=false;
 
-
-
+        }
 
         super.onStart();
     }
@@ -126,10 +148,12 @@ SharedPreferences sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE
         SharedPreferences.Editor editor= sharedPreferences.edit();
 
 AdapterDisplayComputers adapter=new AdapterDisplayComputers();
+        editor.putString("NAME", adapter.Name);
 
        editor.putString("IP",adapter.IP);
-        editor.commit();
-        Toast.makeText(this,adapter.IP,Toast.LENGTH_LONG).show();
+        //editor.commit();
+        editor.apply();
+        Toast.makeText(this,adapter.IP+ adapter.Name,Toast.LENGTH_LONG).show();
 
     }
 }

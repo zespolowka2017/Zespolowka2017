@@ -2,69 +2,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hubertstpiski.speak1.Connections"
+    android:background="#303030"
+    tools:context="com.example.sebastian.demonsphinx.AddConection"
     >
 
     <!-- TODO: Update blank fragment layout -->
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:hint="Wprowadż mac adres"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/ip"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:textAlignment="center" />
+
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_marginTop="33dp"
-        android:id="@+id/editText3"
+        android:id="@+id/name"
         android:textAlignment="center"
-        android:hint="Wprowadź nazę urządzenia" />
+        android:hint="Wprowadź nazwę urządzenia"
+        android:textColorHint="#ffc400"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="115dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_marginTop="51dp"
-        android:id="@+id/editText4"
-        android:textAlignment="center"
-        android:hint="Wprowadź ..." />
 
     <Button
-        android:text="Dodaj urządzenie"
+        android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText4"
-        android:layout_marginTop="49dp"
-        android:id="@+id/add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="67dp"
         android:onClick="Add"
-        android:layout_alignParentEnd="true" />
+        android:text="Dodaj urządzenie"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/ip"
         android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Wprowadz adres IP"
-        android:id="@+id/ip"
-        android:textSize="14sp"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="?android:attr/textColorHintInverse"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:textColorHint="#ffc400"
+        android:textSize="18sp" />
 
 </RelativeLayout>

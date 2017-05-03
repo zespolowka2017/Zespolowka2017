@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setTitle("DŻASTALK");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -102,7 +103,13 @@ public class MainActivity extends AppCompatActivity
             setTitle("Połączenia");
             Intent intent=new Intent(MainActivity.this,ConnectionView.class);
             startActivity(intent);
-        } else if (id == R.id.main) {
+        }
+        if (id == R.id.addconections) {
+            setTitle("Dodaj Połączenie");
+
+            Intent intent=new Intent(MainActivity.this,AddConection.class);
+            startActivity(intent);
+        }else if (id == R.id.main) {
             setTitle("Panel Główny");
             Main main = new Main();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

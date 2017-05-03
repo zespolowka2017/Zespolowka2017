@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class AdapterDisplayComputers extends RecyclerView.Adapter{
+public class AdapterDisplayComputers extends RecyclerView.Adapter {
     public Context context;
    public static String IP;
+    public static String Name;
+    public static boolean click=false;
     public String iptext;
 
 
@@ -36,6 +39,7 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
     private class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView ip;
+        public TextView name;
 
 
 
@@ -43,6 +47,7 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
             super(pItem);
             context=pItem.getContext();
             ip = (TextView) pItem.findViewById(R.id.ip_address);
+            name= (TextView) pItem.findViewById(R.id.name);
             computers= (RecyclerView) pItem.findViewById(R.id.computers);
 
         }
@@ -73,8 +78,10 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
 
 
                Intent intent=new Intent(context,ConnectionView.class);
-                NameOfComputers name=list.get(position);
-                IP=name.getIp();
+                NameOfComputers lcomp=list.get(position);
+                IP=lcomp.getIp();
+                Name=lcomp.getName();
+                click=true;
 
 
             }
@@ -87,8 +94,10 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
         // uzupełniamy layout artykułu
-        NameOfComputers nameOfComputers = list.get(i);
-        ((AdapterDisplayComputers.MyViewHolder) viewHolder).ip.setText(nameOfComputers.getIp());
+       // NameOfComputers nameOfComputers = list.get(i);
+        Log.d("Adapter",list.get(i).getIp()+list.get(i).getName());
+        ((AdapterDisplayComputers.MyViewHolder) viewHolder).ip.setText(list.get(i).getIp().replace("/",""));
+        ((AdapterDisplayComputers.MyViewHolder) viewHolder).name.setText(list.get(i).getName());
 
     }
 
