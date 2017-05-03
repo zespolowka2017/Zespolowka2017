@@ -30,53 +30,25 @@ import java.util.ArrayList;
  */
 public class Main extends Fragment {
 
-ImageView imageView;
-    boolean turnOn=false;
+    private  ImageView imageView;
+
     public Main() {
-       // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
-
-
-
 
         View view= inflater.inflate(R.layout.fragment_main, container, false);
 
-
-
-
-
         imageView= (ImageView) view.findViewById(R.id.imageView2);
-      //  ListView compuerList=(ListView)view.findViewById(R.id.computerList);
-        //compuerList.setAdapter(adapter);
 
-       /* final ToggleButton tbtn= (ToggleButton) view.findViewById(R.id.connect);
-        compuerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tbtn.setVisibility(view.VISIBLE);
-
-            }
-        });
-*/
 
         final ToggleButton btnServiceStartStop = (ToggleButton) view.findViewById(R.id.btnStartStopService);
 
         btnServiceStartStop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    startService(new Intent(, ListenService.class));
-//                } else {
-//                    getActivity().stopService(new Intent(getActivity(),ListenService.class));
-//                }
-
                 Intent serviceIntent = new Intent(buttonView.getContext(), ListenService.class);
 
                 if(isChecked) {
@@ -102,7 +74,7 @@ ImageView imageView;
     @Override
     public void onResume(){
         super.onResume();
-        // put your code here...
+
         SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         TextView textView= (TextView) this.getActivity().findViewById(R.id.info);
         TextView textView1= (TextView) this.getActivity().findViewById(R.id.conectName);

@@ -8,6 +8,11 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Klasa opdowiada za przygotowanie danych okreslajacych jakie sa dostepne opcje ustawien
+ * wraz z ich opisem.
+ * Powstale dane przesylane sa do odpowiedniego adaptera w celu ich wyswietlenia na ekranie telefonu.
+ */
 public class DisplayOptions extends AppCompatActivity {
 
     @Override
@@ -33,8 +38,8 @@ public class DisplayOptions extends AppCompatActivity {
             articles.add(new NameOfOptions("Zwiększenie Jasności","Opcja pozwalająca na edycję słowa kluczowego dla zwiększenia jasności ekranu telefonu"));
             articles.add(new NameOfOptions("Zmiana Trybu","Opcja pozwalająca na edycję słowa kluczowego dla zmainy trybu dzwiękowego telefonu (podgłoszenie)"));
             articles.add(new NameOfOptions("Zmiana Trybu do wibracji","Opcja pozwalająca na edycję słowa kluczowego dla zmainy trybu dzwiękowego telefonu (przyciszanie)"));
-        articles.add(new NameOfOptions("Połączenie Głosowe","Opcja pozwalająca na edycję słowa kluczowego dla wykonania połączenia telefonicznego"));
-        articles.add(new NameOfOptions("Przeglądarka","Opcja pozwalająca na edycję słowa kluczowego dla uruchomienia przeglądarki www"));
+             articles.add(new NameOfOptions("Połączenie Głosowe","Opcja pozwalająca na edycję słowa kluczowego dla wykonania połączenia telefonicznego"));
+                articles.add(new NameOfOptions("Przeglądarka","Opcja pozwalająca na edycję słowa kluczowego dla uruchomienia przeglądarki www"));
         articles.add(new NameOfOptions("Zmiejszenie poziomu dzwięku mediów","Opcja pozwalająca na edycję słowa kluczowego dla zmniejsenia głośności mediów wraz z jej procentową wartością."));
         articles.add(new NameOfOptions("Zwiększenie poziomu dzwięku mediów","Opcja pozwalająca na edycję słowa kluczowego dla zwiększenia głośności mediów wraz z jej procentową wartością."));
         articles.add(new NameOfOptions("Aparat","Opcja pozwalająca na edycję słowa kluczowego dla uruchomienia aparatu."));

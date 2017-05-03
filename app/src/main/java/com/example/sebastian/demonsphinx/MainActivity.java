@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private SharedPreferences sharedPreferences;
     EditText text;
 
 
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -73,19 +73,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -96,8 +91,8 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         TextView text = (TextView) findViewById(R.id.info);
         if (id == R.id.connections) {
             setTitle("Połączenia");
@@ -119,14 +114,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.voice) {
             setTitle("Ustawienia Głosowe");
-         //   VoiceSettings voiceSettings = new VoiceSettings();
+
             Intent intent=new Intent(MainActivity.this,DisplayOptions.class);
             startActivity(intent);
-           /* FunctionList functionList=new FunctionList();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.
-                    setCustomAnimations(R.anim.screen_anim, R.anim.screen_anim).
-                    replace(R.id.frame, functionList).commit();*/
         } else if (id == R.id.about) {
             setTitle("O Aplikacji");
             About about = new About();
@@ -150,14 +140,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void Add(View view) {
-        Toast.makeText(getApplicationContext(), "Dodano", Toast.LENGTH_LONG).show();
-    }
-
-    public void Refresh(View view) {
-        Toast.makeText(getApplicationContext(), "Odświeżam", Toast.LENGTH_LONG).show();
-    }
-
 
     public void Back(MenuItem item) {
         Main main = new Main();
@@ -177,19 +159,5 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    SharedPreferences sharedPreferences;
-    public void SaveConfiguration(View view) {
-        //text= (EditText) findViewById(R.id.editText);
-        String name="";
 
-
-
-        //editor.putString("VolumePlus","Głośniej");
-        //editor.commit();
-        //String name1=sharedPreferences.getString("VolumePlus",name);
-        //text.setText(name1);
-      //preferences.Save("Name","Michał");
-
-       Toast.makeText(this,text.getText().toString(), Toast.LENGTH_LONG).show();
-    }
 }

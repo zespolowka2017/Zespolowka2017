@@ -9,19 +9,18 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Klasa odpowiedzialna za wyswietlenie widoku przedstawiajacego instrukcje korzystania z aplikacji wraz z pomoca.
  */
 public class Instructions extends Fragment {
 
 
     public Instructions() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_instructions, container, false);
     }
 

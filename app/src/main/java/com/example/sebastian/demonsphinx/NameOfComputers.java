@@ -5,36 +5,21 @@ package com.example.sebastian.demonsphinx;
  */
 
 public class NameOfComputers {
-
-    public NameOfComputers(){
-
-    }
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    private String ip;
-
-    public String getName() {
-        return name;
-    }
-
     private String name;
-    private int position;
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public int getPosition() {
-
-        return position;
-    }
+    private String ip;
 
     public NameOfComputers(String ip,String name) {
         this.ip = ip;
         this.name=name;
 
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getIp() {
