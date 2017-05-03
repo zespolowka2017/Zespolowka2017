@@ -1,4 +1,5 @@
-package com.example.sebastian.demonsphinx;
+package com.example.asddda;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -27,7 +28,7 @@ public class ConnectionTask extends AsyncTask<Void, Void, Void>{
     @Override
     protected void onPreExecute() {
         //okno dialogowe 
-    	//podczas ï¿½ï¿½czenia siï¿½ z serwerem moï¿½na dodaï¿½ okno
+    	//podczas ³¹czenia siê z serwerem mo¿na dodaæ okno
     	//tu Activity.ShowDialog...
     }
 
@@ -61,7 +62,7 @@ public class ConnectionTask extends AsyncTask<Void, Void, Void>{
 	}
 	@Override
     protected void onPostExecute(Void result) {
-       //tu zamykanie okna ï¿½adowania po poï¿½ï¿½czeniu jesli w onpre cos robione
+       //tu zamykanie okna ³adowania po po³¹czeniu jesli w onpre cos robione
     }
 
 

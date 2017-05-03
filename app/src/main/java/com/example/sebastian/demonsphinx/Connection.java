@@ -1,4 +1,4 @@
-package com.example.sebastian.demonsphinx;
+package com.example.asddda;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.net.SocketException;
 import android.util.Log;
 
 /*unikalne dla kazdego polaczenia*/
-/*przechowuje informacje na temat poï¿½aczenia*/
+/*przechowuje informacje na temat po³aczenia*/
 
 
 public class Connection{
@@ -51,7 +51,7 @@ public class Connection{
 	
 			ps.println(token);
 			ps.println(msg);			
-			Log.d("debug","wysï¿½ane");
+			Log.d("debug","wys³ane");
 	}
 	
 	
