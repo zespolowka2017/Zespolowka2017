@@ -44,6 +44,9 @@ public class Connection{
 			}catch (IOException exc) {
 				Log.d("err","zamykanie gniazda");
 				exc.printStackTrace();
+			}catch (NullPointerException exc) {
+				Log.d("err","zamykanie gniazda");
+				exc.printStackTrace();
 			}
 	}
 	

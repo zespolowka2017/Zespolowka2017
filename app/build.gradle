@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Sherlock
+    dataBinding {
+        enabled = true
+    }
 }
 
 repositories {
@@ -43,5 +48,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.github.amigold.fundapter:library:1.0'
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+
+    // Sherlock
+    compile('com.github.ajitsing:sherlock:1.0.0@aar') {
+        transitive = true
+    }
     testCompile 'junit:junit:4.12'
 }

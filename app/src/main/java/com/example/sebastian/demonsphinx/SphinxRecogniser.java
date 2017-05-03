@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
@@ -41,8 +42,11 @@ public class SphinxRecogniser implements RecognitionListener {
      * metoda przerywajaca nasluchiwanie na slowo klucz
      */
     public void stopRecognition() {
-        recognizer.stop();
-        recognizer.shutdown();
+        if(recognizer != null) {
+            Log.d("SPHINXRECOGNIZER", "stopRecognition");
+            recognizer.stop();
+            recognizer.shutdown();
+        }
     }
 
     // Metody z RecognitionListener (od PocketSphinx) potrzebne do implementacji
@@ -67,7 +71,8 @@ public class SphinxRecogniser implements RecognitionListener {
             return;
 
         result = hypothesis.getHypstr();
-
+        Log.d("SPHINXRECOGNIZER", result);
+//
         recognizer.stop();
     }
 
@@ -92,7 +97,7 @@ public class SphinxRecogniser implements RecognitionListener {
                 } break;
 
                 default: {
-                    Toast.makeText(context, "CANNOT RECOGNIZE WORD", Toast.LENGTH_SHORT).show();
+//                    +
                     recognizer.startListening(KWS_SEARCH);
                 }
             }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DemonSphinx-Speak1.iml" filepath="$PROJECT_DIR$/DemonSphinx-Speak1.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zesp.iml" filepath="$PROJECT_DIR$/zesp.iml" />
     </modules>
   </component>
 </project>

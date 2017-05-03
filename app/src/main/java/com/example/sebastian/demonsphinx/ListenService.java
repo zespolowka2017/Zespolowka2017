@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.PhoneStateListener;
@@ -19,7 +20,7 @@ public class ListenService extends Service {
     private SphinxRecogniser sphinxRecognise;
 
     private String IP=null;
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
     private Connection con;
 
     /**
@@ -84,7 +85,9 @@ public class ListenService extends Service {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
         // zerwanie polaczenia
-        con.disconnect();
+        if(con != null) {
+            con.disconnect();
+        }
 
         // przeslanie statusu serwisu
         sendResult("Service stopped");
@@ -114,7 +117,7 @@ public class ListenService extends Service {
             String[] parts = message.split(";;");
 
             if(parts.length > 1) {
-                Toast.makeText(context, parts[0], Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, parts[0] + ": " + parts[1], Toast.LENGTH_SHORT).show();
                 if(parts[0].equals("Telefon")) {
                     Intent new_intent = new Intent();
                     new_intent.putExtra("Polecenie", parts[1]);
@@ -124,7 +127,9 @@ public class ListenService extends Service {
                     startActivity(new_intent);
                 }
                 else {
-                    con.send(parts[1].toLowerCase());
+                    if(!con.ip.equals("Brak IP")) {
+                        con.send(parts[1].toLowerCase());
+                    }
                 }
             }
 
@@ -136,8 +141,17 @@ public class ListenService extends Service {
 
     // funkcja pozwalajaca by rozpoczac na nowo nasluchiwanie
     // na slowo klucz
+    // funkcja pozwalajaca by rozpoczac na nowo nasluchiwanie
+    // na slowo klucz
     private void startRecognition(){
-        sphinxRecognise = new SphinxRecogniser(this);
+        final Context context = this;
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//
+//            }
+//        }, 500);   //5 seconds
+        sphinxRecognise = new SphinxRecogniser(context);
     }
 
     private final PhoneStateListener phoneStateListener = new PhoneStateListener() {

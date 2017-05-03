@@ -2,7 +2,15 @@
 
 grammar devices;
 
-<device> = komputer   |
+<device> = zero       |
+          two         |
+          three       |
+          four        |
+          five        |
+          six         |
+          seven       |
+          komputer    |
           telefon     ;
 
-public <devices> = <device>+;
+
+public <devices> = <device>;
