@@ -17,9 +17,7 @@ import java.util.ArrayList;
  */
 
 public class MyAdapter extends RecyclerView.Adapter {
-    public  Context context; //SharedPreferences sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
-    FragmentManager fragmentManager,fragmentManager3;
-    FragmentTransaction fragmentTransaction, fragmentTransaction1,fragmentTransaction2,fragmentTransaction3,fragmentTransaction4;
+    public  Context context;
     // źródło danych
     private ArrayList<NameOfOptions> mArticles = new ArrayList<>();
 

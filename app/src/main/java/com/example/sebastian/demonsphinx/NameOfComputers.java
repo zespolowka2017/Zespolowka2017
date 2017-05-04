@@ -5,11 +5,12 @@ package com.example.sebastian.demonsphinx;
  */
 
 public class NameOfComputers {
+    private String name;
     private String ip;
-    private String computerName;
-    private int position;
 
-    public NameOfComputers(){
+    public NameOfComputers(String ip,String name) {
+        this.ip = ip;
+        this.name=name;
 
     }
 
@@ -17,29 +18,11 @@ public class NameOfComputers {
         this.ip = ip;
     }
 
-    public void setComputerName(String computerName) {
-        this.computerName = computerName;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public int getPosition() {
-
-        return position;
-    }
-
-    public NameOfComputers(String ip, String computerName) {
-        this.ip = ip;
-        this.computerName = computerName;
+    public String getName() {
+        return name;
     }
 
     public String getIp() {
         return ip;
-    }
-
-    public String getComputerName() {
-        return computerName;
     }
 }

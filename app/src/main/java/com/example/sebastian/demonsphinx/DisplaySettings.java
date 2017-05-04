@@ -53,7 +53,7 @@ public class DisplaySettings extends AppCompatActivity {
         key = getIntent().getIntExtra("key", 0);
         if (key == 0) {
             setTitle("Zmniejszenie jasności");
-            txt2.setText(sharedPreferences.getString("BrightnesMinus", " ").toString());
+            txt2.setText(sharedPreferences.getString("BrightnesMinus", " "));
             txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesMinus1", 1))+ "%");
             txt4.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -61,7 +61,7 @@ public class DisplaySettings extends AppCompatActivity {
         }
         else if (key == 1) {
             setTitle("Zwiększenie jasności");
-            txt2.setText(sharedPreferences.getString("BrightnesPlus", " ").toString());
+            txt2.setText(sharedPreferences.getString("BrightnesPlus", " "));
             txt3.setText(String.valueOf(sharedPreferences.getInt("BrightnesPlus1", 1))+"%");
             txt4.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -70,7 +70,7 @@ public class DisplaySettings extends AppCompatActivity {
         }
         else if (key == 2) {
             setTitle("Zmaina trybu telefonu");
-            txt2.setText(sharedPreferences.getString("VolumePlus", " ").toString());
+            txt2.setText(sharedPreferences.getString("VolumePlus", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -83,7 +83,7 @@ public class DisplaySettings extends AppCompatActivity {
         else if (key == 3) {
             setTitle("Zmiana trybu telefonu");
 
-            txt2.setText(sharedPreferences.getString("VolumeMinus", " ").toString());
+            txt2.setText(sharedPreferences.getString("VolumeMinus", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -96,7 +96,7 @@ public class DisplaySettings extends AppCompatActivity {
         else if (key == 4) {
             setTitle("Połączenia głosowe");
 
-            txt2.setText(sharedPreferences.getString("Call", " ").toString());
+            txt2.setText(sharedPreferences.getString("Call", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -109,7 +109,7 @@ public class DisplaySettings extends AppCompatActivity {
         else if (key == 5) {
             setTitle("Przeglądarka");
 
-            txt2.setText(sharedPreferences.getString("Browser", " ").toString());
+            txt2.setText(sharedPreferences.getString("Browser", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -122,9 +122,9 @@ public class DisplaySettings extends AppCompatActivity {
         else if (key == 6) {
             setTitle("MultimediaPlus");
 
-            txt2.setText(sharedPreferences.getString("Multimedia", " ").toString());
+            txt2.setText(sharedPreferences.getString("Multimedia", " "));
             txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia1", 1)));
-            txt3.setText(sharedPreferences.getString("Multimedia2", " ").toString());
+            txt3.setText(sharedPreferences.getString("Multimedia2", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
 
@@ -134,9 +134,9 @@ public class DisplaySettings extends AppCompatActivity {
         else if (key == 7) {
             setTitle("MultimediaMinus");
 
-            txt2.setText(sharedPreferences.getString("Multimedia", " ").toString());
+            txt2.setText(sharedPreferences.getString("Multimedia", " "));
             txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia4", 1)));
-            txt3.setText(sharedPreferences.getString("Multimedia3", " ").toString());
+            txt3.setText(sharedPreferences.getString("Multimedia3", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
 
@@ -145,7 +145,7 @@ public class DisplaySettings extends AppCompatActivity {
         }
         else if (key == 8) {
             setTitle("Aparat");
-            txt2.setText(sharedPreferences.getString("Foto", " ").toString());
+            txt2.setText(sharedPreferences.getString("Foto", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
             eValue2.setVisibility(View.INVISIBLE);
@@ -156,6 +156,7 @@ public class DisplaySettings extends AppCompatActivity {
 
 
         }
+
         /**
          * metoda obslugujaca zdarzenie nacisniecia przycisku
          */

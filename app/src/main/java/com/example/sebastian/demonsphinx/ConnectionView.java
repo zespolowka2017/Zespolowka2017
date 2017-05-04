@@ -8,22 +8,27 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Klasa odpowiedzialna za stworzenei widoku wyszukiwania komputerow w sieci.
+ * Opowiada rowniez za wywolanie metody wyszukiwajacej komputery.
+ * Pobiera wyniki wyszukiwania i przesyla dane do klasy AdapterDisplayComputers w celu ich wyswietlenia na ekranie.
+ */
 public class ConnectionView extends AppCompatActivity {
-        public static boolean state;
-    ProgressDialog progressDialog;
-//    List<String> computer = new ArrayList<>();
-    Map<String, String> computer;
-    WifiInfo wifiInfo ;
 
+    private  ProgressDialog progressDialog;
+    List<String> computer = new ArrayList<>();
+    WifiInfo wifiInfo ;
+    AdapterDisplayComputers adapter;
     Context context;
     RecyclerView recyclerView;
     ArrayList<NameOfComputers> computerLists;
@@ -49,45 +54,38 @@ public class ConnectionView extends AppCompatActivity {
 
         computerLists = new ArrayList<>();
 
-
         Thread t=new Thread(){
             public void run(){
                 try {
-                    computer = new DatagramSender().execute(wifiInfo.getBroadcast()).get();
-//                    Iterator<String> iterator = computer.iterator();
-//                    while (iterator.hasNext()) {
-//                        computerLists.add(new NameOfComputers(iterator.next()));
-//                    }
+                    Map<String,String> map=new HashMap<String,String>();
+                    map = new DatagramSender().execute(wifiInfo.getBroadcast()).get();
 
-                    for (Map.Entry<String, String> entry : computer.entrySet())
-                    {
-                        computerLists.add(new NameOfComputers(entry.getKey(), entry.getValue()));
+                    Iterator myIterator = map.keySet().iterator();
+                    while(myIterator.hasNext()) {
+                        String ip=(String)myIterator.next();
+                        String name=(String)map.get(ip);
+                        computerLists.add(new NameOfComputers(ip.replace("/",""),name));
+                        Log.d("lista1",computerLists.get(0).toString());
+                        Log.d("lista",computerLists.get(0).getIp()+computerLists.get(0).getName());
                     }
-
-                    state=false;
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         recyclerView.setAdapter(new AdapterDisplayComputers(computerLists, recyclerView));
                         progressDialog.dismiss();
+                        adapter=new AdapterDisplayComputers();
                     }
                 });
             }
 
         };
         t.start();
-
-
-
-
-
 
         super.onStart();
     }
@@ -97,43 +95,26 @@ public class ConnectionView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connetion_view);
 
-        state=false;
         progressDialog=new ProgressDialog(ConnectionView.this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Wyszukiwanie");
         progressDialog.setMessage("Szukam dostępnych komputerów w sieci...");
-
         progressDialog.show();
 
-
-
-
-
-
     }
 
-    private void Progress(){
-        new Thread(new Runnable(){
-            @Override
-            public void run(){
-                while(state){
-
-                    progressDialog.incrementProgressBy(1);
-
-                }
-            }
-        }).start();
-    }
 
     public void Conect(View view) {
-SharedPreferences sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences.edit();
 
-AdapterDisplayComputers adapter=new AdapterDisplayComputers();
+        AdapterDisplayComputers adapter=new AdapterDisplayComputers();
+        editor.putString("NAME", adapter.Name);
 
-       editor.putString("IP",adapter.IP);
-        editor.commit();
-        Toast.makeText(this,adapter.IP,Toast.LENGTH_LONG).show();
-
+        editor.putString("IP",adapter.IP);
+        //editor.commit();
+        editor.apply();
+        Toast.makeText(this,adapter.IP+ adapter.Name,Toast.LENGTH_LONG).show();
     }
 }

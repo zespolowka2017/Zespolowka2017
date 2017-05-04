@@ -6,8 +6,6 @@
     android:background="#303030">
 
 
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/computers"
         android:layout_width="391dp"

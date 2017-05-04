@@ -1,58 +1,49 @@
 package com.example.sebastian.demonsphinx;
 
-import android.content.Context;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
 
-
-public class AdapterDisplayComputers extends RecyclerView.Adapter{
-    public Context context;
-   public static String IP;
-    public String iptext;
-
-
+public class AdapterDisplayComputers extends RecyclerView.Adapter {
+    public static String IP;
+    public static String Name;
     // źródło danych
     private ArrayList<NameOfComputers> list = new ArrayList<>();
-
     // obiekt listy artykułów
     private RecyclerView mRecyclerView;
     private RecyclerView computers;
+
 
     // implementacja wzorca ViewHolder
     // każdy obiekt tej klasy przechowuje odniesienie do layoutu elementu listy
     // dzięki temu wywołujemy findViewById() tylko raz dla każdego elementu
     private class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView ip;
-
+        private TextView ip;
+        private TextView name;
 
 
         public MyViewHolder(View pItem) {
             super(pItem);
-            context=pItem.getContext();
             ip = (TextView) pItem.findViewById(R.id.ip_address);
-            computers= (RecyclerView) pItem.findViewById(R.id.computers);
+            name = (TextView) pItem.findViewById(R.id.name);
+            computers = (RecyclerView) pItem.findViewById(R.id.computers);
 
         }
     }
 
-    public AdapterDisplayComputers(){
+    public AdapterDisplayComputers() {
 
     }
+
     // konstruktor adaptera
-    public AdapterDisplayComputers(ArrayList<NameOfComputers> pArticles, RecyclerView pRecyclerView){
+    public AdapterDisplayComputers(ArrayList<NameOfComputers> pArticles, RecyclerView pRecyclerView) {
         list = pArticles;
         mRecyclerView = pRecyclerView;
     }
@@ -62,7 +53,7 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
         // tworzymy layout artykułu oraz obiekt ViewHoldera
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycle_view_computerlist, viewGroup, false);
-        final CardView cardView= (CardView) view.findViewById(R.id.cardview);
+        final CardView cardView = (CardView) view.findViewById(R.id.cardview);
         // dla elementu listy ustawiamy obiekt OnClickListener,
         // który usunie element z listy po kliknięciu na niego
         view.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +62,9 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
                 // odnajdujemy indeks klikniętego elementu
                 int position = mRecyclerView.getChildAdapterPosition(v);
 
-
-               Intent intent=new Intent(context,ConnectionView.class);
-                NameOfComputers name=list.get(position);
-                IP=name.getIp();
-
+                NameOfComputers lcomp = list.get(position);
+                IP = lcomp.getIp();
+                Name = lcomp.getName();
 
             }
         });
@@ -86,9 +75,10 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-        // uzupełniamy layout artykułu
-        NameOfComputers nameOfComputers = list.get(i);
-        ((AdapterDisplayComputers.MyViewHolder) viewHolder).ip.setText(nameOfComputers.getIp());
+        // uzupełniamy layout dostepnych komputerow
+
+        ((AdapterDisplayComputers.MyViewHolder) viewHolder).ip.setText(list.get(i).getIp().replace("/", ""));
+        ((AdapterDisplayComputers.MyViewHolder) viewHolder).name.setText(list.get(i).getName());
 
     }
 
@@ -97,7 +87,6 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter{
         return list.size();
     }
 
-    public String getIP() {
-        return IP;
-    }
 }
+
+
