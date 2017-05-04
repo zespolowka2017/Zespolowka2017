@@ -33,7 +33,7 @@ public class Gui {
         oProgramieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null, "Serwer GUI by Szczupakowski.", "O programie", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(oProgramieButton, "Serwer GUI by Szczupakowski.", "O programie", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         glownyWidokButton.addActionListener(new ActionListener() {
