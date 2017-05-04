@@ -14,12 +14,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class ConnectionView extends AppCompatActivity {
         public static boolean state;
     ProgressDialog progressDialog;
-    List<String> computer = new ArrayList<>();
+//    List<String> computer = new ArrayList<>();
+    Map<String, String> computer;
     WifiInfo wifiInfo ;
 
     Context context;
@@ -51,14 +53,16 @@ public class ConnectionView extends AppCompatActivity {
         Thread t=new Thread(){
             public void run(){
                 try {
-
                     computer = new DatagramSender().execute(wifiInfo.getBroadcast()).get();
-                    Iterator<String> iterator = computer.iterator();
-                    while (iterator.hasNext()) {
-                        computerLists.add(new NameOfComputers(iterator.next()));
+//                    Iterator<String> iterator = computer.iterator();
+//                    while (iterator.hasNext()) {
+//                        computerLists.add(new NameOfComputers(iterator.next()));
+//                    }
+
+                    for (Map.Entry<String, String> entry : computer.entrySet())
+                    {
+                        computerLists.add(new NameOfComputers(entry.getKey(), entry.getValue()));
                     }
-
-
 
                     state=false;
                 }

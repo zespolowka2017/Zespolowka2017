@@ -97,7 +97,6 @@ public class SphinxRecogniser implements RecognitionListener {
                 } break;
 
                 default: {
-//                    +
                     recognizer.startListening(KWS_SEARCH);
                 }
             }
