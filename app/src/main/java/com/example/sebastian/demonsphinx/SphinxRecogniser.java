@@ -29,12 +29,14 @@ public class SphinxRecogniser implements RecognitionListener {
     private String result = "NO RESULT";
 
     // zmienna odpowiedzialna za rozpoznawanie mowy dla PocketSphinxa
-    private SpeechRecognizer recognizer;
+    private SpeechRecognizer recognizer = null;
 
+    private Boolean isWorking;
 
     public SphinxRecogniser(Context con) {
         context = con;
 
+        isWorking = true;
         runRecognizerSetup();
     }
 
@@ -42,11 +44,13 @@ public class SphinxRecogniser implements RecognitionListener {
      * metoda przerywajaca nasluchiwanie na slowo klucz
      */
     public void stopRecognition() {
-        if(recognizer != null) {
+        if(recognizer != null && isWorking) {
             Log.d("SPHINXRECOGNIZER", "stopRecognition");
             recognizer.stop();
             recognizer.shutdown();
         }
+
+        isWorking = false;
     }
 
     // Metody z RecognitionListener (od PocketSphinx) potrzebne do implementacji
@@ -59,7 +63,8 @@ public class SphinxRecogniser implements RecognitionListener {
     // rozpoznawanie
     @Override
     public void onEndOfSpeech() {
-        if (!recognizer.getSearchName().equals(KWS_SEARCH))
+        if (!recognizer.getSearchName().equals(KWS_SEARCH) && isWorking)
+            Log.d("SPHINXRECOGNIZER", "END OF SPEECH");
             recognizer.startListening(KWS_SEARCH);
     }
 
@@ -71,7 +76,7 @@ public class SphinxRecogniser implements RecognitionListener {
             return;
 
         result = hypothesis.getHypstr();
-        Log.d("SPHINXRECOGNIZER", result);
+        Log.d("SPHINXRECOGNIZER", result + " " + isWorking);
 //
         recognizer.stop();
     }
@@ -85,19 +90,17 @@ public class SphinxRecogniser implements RecognitionListener {
             result = hypothesis.getHypstr();
             switch (result) {
                 case "komputer": {
-                    // Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-
                     computerRecognised();
                 } break;
 
                 case "telefon": {
-                    // Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-
                     phoneRecognised();
                 } break;
 
                 default: {
-                    recognizer.startListening(KWS_SEARCH);
+                    if(isWorking) {
+                        recognizer.startListening(KWS_SEARCH);
+                    }
                 }
             }
         }
@@ -139,9 +142,12 @@ public class SphinxRecogniser implements RecognitionListener {
             protected void onPostExecute(Exception result) {
                 if (result != null) {
                     Toast.makeText(context, "Failed to init recognizer" + result, Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(isWorking)
                     recognizer.startListening(KWS_SEARCH);
-                }
+                    else {
+                        recognizer.stop();
+                        recognizer.shutdown();
+                    }
             }
         }.execute();
     }

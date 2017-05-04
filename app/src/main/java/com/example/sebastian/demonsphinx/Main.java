@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.amigold.fundapter.BindDictionary;
@@ -60,7 +61,6 @@ public class Main extends Fragment {
                 } else {
                     imageView.setImageResource(R.drawable.transitionoff);
                     ((TransitionDrawable) imageView.getDrawable()).startTransition(2000);
-
                     getActivity().stopService(serviceIntent);
 
                 }
