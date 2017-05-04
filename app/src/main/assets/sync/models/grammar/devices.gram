@@ -2,13 +2,17 @@
 
 grammar devices;
 
-<device> = zero       |
+<device> = oh         |
+          zero        |
+          one         |
           two         |
           three       |
           four        |
           five        |
           six         |
           seven       |
+          nine        |
+          ten         |
           komputer    |
           telefon     ;
 

@@ -34,9 +34,7 @@ public class Connection{
 	void disconnect() {			
 			try{			
 				ps.close();			
-				socket.close(); 			
-				sockOut.close();
-				sockIn.close();				
+				socket.close();
 				Log.d("debug","zamkniete");
 			}catch (SocketException exc) {
 				Log.d("err","zamykanie gniazda");
@@ -50,11 +48,15 @@ public class Connection{
 			}
 	}
 	
-	void send(String msg) {			
-	
+	void send(String msg) {
+		try {
 			ps.println(token);
-			ps.println(msg);			
-			Log.d("debug","wys�ane");
+			ps.println(msg);
+			Log.d("debug", "wys�ane");
+		} catch (NullPointerException exc) {
+			Log.d("err", "null pointer exception");
+			exc.printStackTrace();
+		}
 	}
 	
 	

@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -117,6 +118,8 @@ public class ListenService extends Service {
             String[] parts = message.split(";;");
 
             if(parts.length > 1) {
+                Log.d("LISTENSERVICE", parts[0] + ": " + parts[1]);
+
                 Toast.makeText(context, parts[0] + ": " + parts[1], Toast.LENGTH_SHORT).show();
                 if(parts[0].equals("Telefon")) {
                     Intent new_intent = new Intent();
@@ -127,8 +130,13 @@ public class ListenService extends Service {
                     startActivity(new_intent);
                 }
                 else {
-                    if(!con.ip.equals("Brak IP")) {
+                    Log.d("LISTENSERVICE", "IP :" + con.ip + ".");
+
+                    if(!con.ip.equals("Brak IP") && !con.ip.equals("") && !con.ip.equals(" ")) {
                         con.send(parts[1].toLowerCase());
+                    }
+                    else {
+                        Toast.makeText(context, "Brak połączenia z komputerem.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

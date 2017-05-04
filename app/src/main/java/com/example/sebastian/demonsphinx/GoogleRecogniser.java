@@ -48,6 +48,13 @@ public class GoogleRecogniser extends Activity implements
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        sendMessage(strResult);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
     }
@@ -83,7 +90,9 @@ public class GoogleRecogniser extends Activity implements
 
         stopListening();
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-        sendMessage("");
+
+        strResult += ";;" + "";
+        finish();
     }
 
     @Override
@@ -105,7 +114,8 @@ public class GoogleRecogniser extends Activity implements
 
         String result = matches.get(0);
 
-        sendMessage(result);
+        strResult += ";;" + result;
+        finish();
     }
 
     @Override
@@ -157,19 +167,11 @@ public class GoogleRecogniser extends Activity implements
     }
 
     private void sendMessage(String message) {
-        strResult += ";;" + message;
-
         // Przeslanie rozpoznanego polecenia do serwisu
         Intent intent = new Intent("GoogleRecogniser");
         intent.putExtra("result", strResult);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
-//        Intent startMain = new Intent(Intent.ACTION_MAIN);
-//        startMain.addCategory(Intent.CATEGORY_HOME);
-//        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(startMain);
-
-        //
         finish();
     }
 }
