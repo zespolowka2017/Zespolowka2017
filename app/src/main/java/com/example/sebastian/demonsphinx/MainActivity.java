@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,27 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
+/**
+ * Główna aktywność aplikacji.
+ * Odpoiwada za wyświettlanie rozwijanego menu z boku ekranu oraz reakcje na wybraną w nim przez użytkownika zakładkę .
+ *
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
     /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     * Obiekt przechowywujący połączenie z plikiem konfiguracyjnym.
      */
-    private GoogleApiClient client;
     private SharedPreferences sharedPreferences;
-    EditText text;
 
 
+    /**
+     * Metoda tworząca widok głównego okna.
+     * Inicjalizuje boczne menu oraz toolbar.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +56,12 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
+    /**
+     * Metoda pozwalająca na otwieranei i zamykanie bocznego menu.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     *
+     * Metoda tworząca zawartość bocznego menu.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -88,24 +93,24 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     *
+     *Metoda wywołująca odpowiednią aktywność wskazaną przez wybor użytkownika opcji z bocznego menu.
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        TextView text = (TextView) findViewById(R.id.info);
         if (id == R.id.connections) {
-            setTitle("Połączenia");
             Intent intent=new Intent(MainActivity.this,ConnectionView.class);
             startActivity(intent);
         }
         if (id == R.id.addconections) {
-            setTitle("Dodaj Połączenie");
-
             Intent intent=new Intent(MainActivity.this,AddConection.class);
             startActivity(intent);
         }else if (id == R.id.main) {
-            setTitle("Panel Główny");
+
             Main main = new Main();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.
@@ -113,12 +118,10 @@ public class MainActivity extends AppCompatActivity
                     replace(R.id.frame, main,"Main").commit();
 
         } else if (id == R.id.voice) {
-            setTitle("Ustawienia Głosowe");
-
             Intent intent=new Intent(MainActivity.this,DisplayOptions.class);
             startActivity(intent);
         } else if (id == R.id.about) {
-            setTitle("O Aplikacji");
+
             About about = new About();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity
                     replace(R.id.frame, about).commit();
 
         } else if (id == R.id.instruction) {
-            setTitle("Pomoc");
+
             Instructions instructions = new Instructions();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.
@@ -152,12 +155,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         sharedPreferences= getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences.edit();
         editor.putString("IP"," ");
+        editor.putString("NAME"," ");
         editor.commit();
-        super.onDestroy();
+
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setTitle("DŻASTALK");
+    }
 }

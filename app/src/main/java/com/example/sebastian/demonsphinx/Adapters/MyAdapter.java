@@ -1,40 +1,45 @@
-package com.example.sebastian.demonsphinx;
+package com.example.sebastian.demonsphinx.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.example.sebastian.demonsphinx.DisplaySettings;
+import com.example.sebastian.demonsphinx.NameOfOptions;
+import com.example.sebastian.demonsphinx.R;
 import java.util.ArrayList;
 
-/**
- * Created by Hubert Stępiński on 24.04.2017.
- */
 
 public class MyAdapter extends RecyclerView.Adapter {
-    public  Context context;
-    // źródło danych
+    private  Context context;
+    /**
+     * Żródło danych
+     */
     private ArrayList<NameOfOptions> mArticles = new ArrayList<>();
 
-    // obiekt listy artykułów
+
     private RecyclerView mRecyclerView;
 
     // implementacja wzorca ViewHolder
     // każdy obiekt tej klasy przechowuje odniesienie do layoutu elementu listy
     // dzięki temu wywołujemy findViewById() tylko raz dla każdego elementu
     private class MyViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * Obiekty przechowywujące referencje do pol tekstowych w CardView.
+         */
+
         public TextView mTitle;
         public TextView mContent;
 
 
         public MyViewHolder(View pItem) {
             super(pItem);
+            //pobranie aktualnego kontekstu.
             context=pItem.getContext();
+            //przypisanie referencji do obiektów
             mTitle = (TextView) pItem.findViewById(R.id.article_title);
             mContent = (TextView) pItem.findViewById(R.id.article_subtitle);
         }
@@ -51,15 +56,14 @@ public class MyAdapter extends RecyclerView.Adapter {
         // tworzymy layout artykułu oraz obiekt ViewHoldera
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycle_view, viewGroup, false);
-            //context=
-        // dla elementu listy ustawiamy obiekt OnClickListener,
-        // który usunie element z listy po kliknięciu na niego
+        // dla elementu listy ustawiamy obiekt OnClickListener
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // odnajdujemy indeks klikniętego elementu
                 int position = mRecyclerView.getChildAdapterPosition(v);
-
+                //w zależności od tego w co kliknął użytkownik do klasy DisplaySettings zostaje ta informacja wysłana w posraci wartości liczbowej
                 Intent intent=new Intent(context,DisplaySettings.class);
                     if(position==0){
                         intent.putExtra("key",0);
@@ -99,12 +103,16 @@ public class MyAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-        // uzupełniamy layout artykułu
+        // uzupełniamy layout listy opcji
         NameOfOptions article = mArticles.get(i);
         ((MyViewHolder) viewHolder).mTitle.setText(article.getTitle());
         ((MyViewHolder) viewHolder).mContent.setText(article.getDescription());
     }
 
+    /**
+     *
+     * Metoda zwracająca rozmiar listy opcji.
+     */
     @Override
     public int getItemCount() {
         return mArticles.size();

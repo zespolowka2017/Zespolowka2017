@@ -6,6 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.sebastian.demonsphinx.Adapters.MyAdapter;
+
 import java.util.ArrayList;
 
 /**

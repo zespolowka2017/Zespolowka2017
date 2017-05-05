@@ -89,25 +89,23 @@
         android:textColor="#80FFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"
-        android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"
         android:layout_alignBaseline="@+id/info"
         android:layout_alignBottom="@+id/info"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_alignStart="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#80FFFFFF"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="italic"
         android:text="Nazwa:"
         android:layout_alignBaseline="@+id/conectName"
         android:layout_alignBottom="@+id/conectName"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_alignStart="@+id/textView11" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/conectName"
@@ -117,12 +115,12 @@
         android:textColor="#80FFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="23dp"
         android:layout_below="@+id/textView9"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="57dp"
-        android:layout_marginEnd="57dp" />
+        android:layout_marginRight="47dp"
+        android:layout_marginEnd="47dp" />
 
 
 </RelativeLayout>

@@ -23,15 +23,14 @@
         android:id="@+id/value1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/value3"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_toLeftOf="@+id/setValue1"
-        android:layout_toStartOf="@+id/setValue1"
         android:text="TextView"
         android:textColor="#B3FFFFFF"
         android:textSize="14sp"
-        android:layout_alignTop="@+id/value3" />
+        android:layout_below="@+id/actuall"
+        android:layout_toLeftOf="@+id/setValue2"
+        android:layout_toStartOf="@+id/setValue2"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp" />
 
     <TextView
         android:id="@+id/actuall"
@@ -53,6 +52,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textColor="#B3FFFFFF"
+        android:textColorHint="#ffc400"
         android:hint="Wprowadź słowo klucz"
         android:inputType="textPersonName"
         android:layout_marginBottom="17dp"
@@ -64,27 +64,33 @@
         android:id="@+id/setValue1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/setValue"
-        android:layout_toEndOf="@+id/setValue"
+        android:textColorHint="#ffc400"
         android:ems="10"
         android:textColor="#B3FFFFFF"
         android:hint="O ile %"
         android:inputType="numberDecimal"
-        android:maxLength="2"/>
+        android:maxLength="2"
+        android:layout_alignBaseline="@+id/setValue"
+        android:layout_alignBottom="@+id/setValue"
+        android:layout_toRightOf="@+id/setValue"
+        android:layout_toEndOf="@+id/setValue" />
 
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
-        android:textColorHint="#FFFFFF"
-        android:textColor="#FFFFFF"
-        android:text="Zapisz"
 
-        android:layout_alignParentBottom="true"
+        android:background="@drawable/ripple"
+        android:text="Zapisz"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/setValue3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="195dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -92,22 +98,30 @@
         android:id="@+id/setValue2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/setValue1"
-        android:layout_toEndOf="@+id/setValue"
-        android:layout_toRightOf="@+id/setValue"
+        android:textColorHint="#ffc400"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:hint="Wprowadź klucz"
+        android:textColor="#B3FFFFFF"
+        android:inputType="textPersonName"
+        android:layout_alignBaseline="@+id/setValue"
+        android:layout_alignBottom="@+id/setValue"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/setValue"
+        android:layout_toEndOf="@+id/setValue" />
 
     <EditText
         android:id="@+id/setValue3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/save"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
+        android:textColorHint="#ffc400"
         android:ems="10"
+        android:textColor="#B3FFFFFF"
         android:hint="O ile %"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/value3"
@@ -130,10 +144,11 @@
         android:text="Nowe Wartości"
         android:textColor="#80FFFFFF"
         android:textSize="18sp"
+        android:layout_above="@+id/setValue"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/setValue" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

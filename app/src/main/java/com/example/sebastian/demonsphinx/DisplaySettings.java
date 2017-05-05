@@ -3,6 +3,8 @@ package com.example.sebastian.demonsphinx;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,24 +16,51 @@ import android.widget.Toast;
  * zapisuje wprowadzone ustawienia przez uzytkownika do pliku konfiguracyjnego
  */
 
-public class DisplaySettings extends AppCompatActivity {
+public class DisplaySettings extends AppCompatActivity  {
 
-    private TextView txt1,txt2,txt3,txt4;
+    /**
+     * Zmienne przechowywujące referencje do pół tekstowych w widoku display_settings.xml.
+     */
+    private TextView txt2;
+    private TextView txt3;
+    private TextView txt4;
+    /**
+     * Zmienna przechowywująca referencje do przyciszku zapisujacego wprowadzone ustawienia.
+     */
     private Button save;
-    private EditText eValue,eValue1,eValue2,eValue3;
+    /**
+     * Zmienne przechowywujące referencje do pól, w których następuje wprowadzanie ustawień przez użytkownika.
+     */
+    private EditText eValue;
+    private EditText eValue1;
+    private EditText eValue2;
+    private EditText eValue3;
+    /**
+     * Zmienna przechowywująca informacje jaka opcja do modyfikacji została wybrana.
+     */
     private int key;
+    /**
+     * Obiekt pozwalający na połączenie z plikiem konfiguracyjnym.
+     */
+    private SharedPreferences sharedPreferences;
 
-    SharedPreferences sharedPreferences;
-
+    /**
+     *Tworzenie widoku z godnie z wyborem opcji przez użytkownika przeznaconego do edycji ustawień aplikacji.
+     **W ciele metody dokunuję się przypisanie referencji do zmiennych.
+     * sprawdzany jest różnież wprowadzany tekst (walidacja).
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_settings);
+        /**
+         * Otworzenie połączenia z plikiem konfiguracyjnym.
+         */
         sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE);
         /**
          * Przypisanie referencji do pol tekstowych
          */
-     //   txt1 = (TextView) findViewById(R.id.STitle);
         txt2 = (TextView) findViewById(R.id.value);
         txt3= (TextView) findViewById(R.id.value1);
         txt4=(TextView) findViewById(R.id.value3);
@@ -43,6 +72,40 @@ public class DisplaySettings extends AppCompatActivity {
         eValue2 = (EditText) findViewById(R.id.setValue2);
         eValue3 = (EditText) findViewById(R.id.setValue3);
 
+eValue2.setFocusable(true);
+
+
+        /**
+         * Walidacja wpisywanego tekstu
+         */
+        eValue2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    if (s.length() ==3) {
+
+                        eValue2.setError("Wprowadź wartość od 0-100");
+                    }
+                }
+                catch(NumberFormatException e)
+                {
+
+                }
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable s){
+        }
+
+        });
+
+
         /**
          * Inicjaizacja przycisku odpowiadajacego za zapis wprowadzonych danych
          */
@@ -51,6 +114,13 @@ public class DisplaySettings extends AppCompatActivity {
          * pobranie informacji jaka opcje wybral uzytkownik
          */
         key = getIntent().getIntExtra("key", 0);
+        /**
+         * Blok instrukcji warunkowych.
+         * W zależności od tego jaka opcja została wybrana, przygotowywany jest obszar widoku do wyświetlenia.
+         * Dodanie tytułu stronie.
+         * Wyświetlenie aktualnych wartości do pól tekstowych pobranych z pliku konfiguracyjnego.
+         * Ustawienie widoczności pól.
+         */
         if (key == 0) {
             setTitle("Zmniejszenie jasności");
             txt2.setText(sharedPreferences.getString("BrightnesMinus", " "));
@@ -127,6 +197,7 @@ public class DisplaySettings extends AppCompatActivity {
             txt3.setText(sharedPreferences.getString("Multimedia2", " "));
 
             eValue1.setVisibility(View.INVISIBLE);
+            eValue2.setHint("Wprowadz klucz");
 
 
 
@@ -163,6 +234,12 @@ public class DisplaySettings extends AppCompatActivity {
         addButtonClickListner();
     }
 
+    /**
+     * Metoda obsługująca kliknięcie w przycis zapisujący ustawienia.
+     * Każdy blok warunkowy odpowiada jednej z dostepnych opcji.
+     * W każdym z bloków następuje wywołanie metody zapisującej ustawienia w pliku konfiguracyjnym z odpowiednią ilością parametrów,
+     * zależną od ilości pól do modyfikacji.
+     */
         public void addButtonClickListner(){
 
 
@@ -275,8 +352,15 @@ public class DisplaySettings extends AppCompatActivity {
             }
         });
     }
-private void addSettings(String value,int value1,String key,String key1) {
 
+    /**
+     *Metoda odpowiedzialna za wprowadzenie zmian do pliku konfiguracyjnego poprzez pobranie tekstu wpisywanego do pól.
+     * Wyświetla informacje o pomyślnym dodaniu takich ustawień.
+     */
+    private void addSettings(String value,int value1,String key,String key1) {
+        /**
+         * Obiekt pozwalający na edycję pól w pliku konfiguracyjnym.
+         */
     SharedPreferences.Editor editor = sharedPreferences.edit();
 
     editor.putString(key, value);
@@ -285,6 +369,11 @@ private void addSettings(String value,int value1,String key,String key1) {
     Toast.makeText(getBaseContext(),"Ustawienia Zapisane Pomyślnie",Toast.LENGTH_LONG).show();
 }
 
+    /**
+     *Przciążona poprzednia metoda wpisująca do pliku konfiguracyjnego jedną wartość.
+     * @param value- wprowadzony tekst przez użytkownika.
+     * @param key- klucz po jakim teskt zostanie zapisany.
+     */
     private void addSettings(String value,String key) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -296,6 +385,16 @@ private void addSettings(String value,int value1,String key,String key1) {
         Toast.makeText(getBaseContext(),"Ustawienia Zapisane Pomyślnie",Toast.LENGTH_LONG).show();
 
     }
+
+    /**
+     * Tak jak w poprzednich przypadkach metoda służy do wprowadzania zmian w pliku konfiguracyjnym.
+     * @param value- wartość wprowadzanego tekstu.
+     * @param value2- wartość wprowadzanego tekstu.
+     * @param value1- wartość wprowadzanego tekstu.
+     * @param key-klucz dla pierwszej wartości.
+     * @param key1-klucz dla drugiej wartości.
+     * @param key2-klucz dla trzeciej wartości.
+     */
     private void addSettings(String value,String value2 ,int value1,String key,String key1,String key2) {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();

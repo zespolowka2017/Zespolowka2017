@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.sebastian.demonsphinx.Adapters.AdapterDisplayComputers;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -26,12 +27,10 @@ import java.util.concurrent.ExecutionException;
 public class ConnectionView extends AppCompatActivity {
 
     private  ProgressDialog progressDialog;
-    List<String> computer = new ArrayList<>();
-    WifiInfo wifiInfo ;
-    AdapterDisplayComputers adapter;
-    Context context;
-    RecyclerView recyclerView;
-    ArrayList<NameOfComputers> computerLists;
+    private WifiInfo wifiInfo ;
+    private Context context;
+    private RecyclerView recyclerView;
+    private ArrayList<NameOfComputers> computerLists;
 
     @Override
     protected void onStart() {
@@ -65,8 +64,6 @@ public class ConnectionView extends AppCompatActivity {
                         String ip=(String)myIterator.next();
                         String name=(String)map.get(ip);
                         computerLists.add(new NameOfComputers(ip.replace("/",""),name));
-                        Log.d("lista1",computerLists.get(0).toString());
-                        Log.d("lista",computerLists.get(0).getIp()+computerLists.get(0).getName());
                     }
                 }
                 catch (InterruptedException e) {
@@ -79,7 +76,7 @@ public class ConnectionView extends AppCompatActivity {
                     public void run() {
                         recyclerView.setAdapter(new AdapterDisplayComputers(computerLists, recyclerView));
                         progressDialog.dismiss();
-                        adapter=new AdapterDisplayComputers();
+                       // adapter=new AdapterDisplayComputers();
                     }
                 });
             }
@@ -94,7 +91,7 @@ public class ConnectionView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connetion_view);
-
+        setTitle("Dostępne Urządzenia");
         progressDialog=new ProgressDialog(ConnectionView.this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Wyszukiwanie");
@@ -112,7 +109,7 @@ public class ConnectionView extends AppCompatActivity {
         AdapterDisplayComputers adapter=new AdapterDisplayComputers();
         editor.putString("NAME", adapter.Name);
 
-        editor.putString("IP",adapter.IP);
+       editor.putString("IP",adapter.IP);
         //editor.commit();
         editor.apply();
         Toast.makeText(this,adapter.IP+ adapter.Name,Toast.LENGTH_LONG).show();

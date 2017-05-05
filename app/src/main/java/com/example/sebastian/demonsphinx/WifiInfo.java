@@ -7,9 +7,6 @@ import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
-
-import java.net.InetAddress;
 
 /**
  * Klasa odpowiedzialna za pobranie informacji na temat dostepnej sieci.
@@ -18,6 +15,9 @@ import java.net.InetAddress;
 
 public class WifiInfo extends Service {
 
+    /**
+     * Zmienne przechowywująca pobrany adres broadcast.
+     */
     private int broadcast;
 
     @Nullable
@@ -25,12 +25,23 @@ public class WifiInfo extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    /**
+     *Konstruktor klasy w którym pobierany jest adres broadcast sieci.
+          */
     public WifiInfo(Context context){
 
+        /**
+         * Utowrzenie obiektu WifiManager potzrbnego do pobrania informacji o sieci WiFi.
+         */
         WifiManager wifiManager= (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         DhcpInfo dhcpInfo=wifiManager.getDhcpInfo();
         broadcast=(dhcpInfo.ipAddress&dhcpInfo.netmask)|~dhcpInfo.netmask;
     }
+
+    /**
+     *Metoda zwracająca zmienna broadcast.
+          */
     public int getBroadcast() {
         return broadcast;
     }

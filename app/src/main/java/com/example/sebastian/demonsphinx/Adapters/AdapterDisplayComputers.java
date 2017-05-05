@@ -1,4 +1,4 @@
-package com.example.sebastian.demonsphinx;
+package com.example.sebastian.demonsphinx.Adapters;
 
 
 import android.support.v7.widget.CardView;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.sebastian.demonsphinx.NameOfComputers;
+import com.example.sebastian.demonsphinx.R;
+
 import java.util.ArrayList;
 
 
@@ -17,7 +21,7 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter {
     private ArrayList<NameOfComputers> list = new ArrayList<>();
     // obiekt listy artykułów
     private RecyclerView mRecyclerView;
-    private RecyclerView computers;
+   // private RecyclerView computers;
 
 
     // implementacja wzorca ViewHolder
@@ -33,7 +37,7 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter {
             super(pItem);
             ip = (TextView) pItem.findViewById(R.id.ip_address);
             name = (TextView) pItem.findViewById(R.id.name);
-            computers = (RecyclerView) pItem.findViewById(R.id.computers);
+           // computers = (RecyclerView) pItem.findViewById(R.id.computers);
 
         }
     }
@@ -43,19 +47,19 @@ public class AdapterDisplayComputers extends RecyclerView.Adapter {
     }
 
     // konstruktor adaptera
-    public AdapterDisplayComputers(ArrayList<NameOfComputers> pArticles, RecyclerView pRecyclerView) {
-        list = pArticles;
+    public AdapterDisplayComputers(ArrayList<NameOfComputers> pList, RecyclerView pRecyclerView) {
+        list = pList;
         mRecyclerView = pRecyclerView;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        // tworzymy layout artykułu oraz obiekt ViewHoldera
+        // tworzymy layout dostepnyc komputerow w sieci oraz obiekt ViewHoldera
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycle_view_computerlist, viewGroup, false);
         final CardView cardView = (CardView) view.findViewById(R.id.cardview);
-        // dla elementu listy ustawiamy obiekt OnClickListener,
-        // który usunie element z listy po kliknięciu na niego
+        // dla elementu listy ustawiamy obiekt OnClickListener
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
