@@ -15,7 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Services {
-	Gui ginterface;
+	static Gui ginterface;
 
     //Sciezka do nircmd.exe (KONIECZNIE!)
     static String path = "nircmd.exe";
@@ -61,12 +61,16 @@ public class Services {
     public static void addApp(String key, String value) {
         appList.put(key, value);
         appsSaveProperties();
+        
+        ginterface.logNetInfo("Dodano/zaktualizowano aplikację: " + key + " (" + value + ")\n");
     }
 
     //Usuwanie aplikacji z listy aplikacji
     public static void removeApp(String key) {
         appList.remove(key);
         appsSaveProperties();
+        
+        ginterface.logNetInfo("Usunięto aplikację " + key + "\n");
     }
 
     /*
@@ -79,6 +83,8 @@ public class Services {
     public static void addCommand(String key, String value) {
         commandList.put(key, value);
         commandsSaveProperties();
+        
+        ginterface.logNetInfo("Zaktualizowano słowo kluczowe \"" + commandList.get(key) + "\" \n");
     }
 
     /*
@@ -90,6 +96,8 @@ public class Services {
     public static void addPath(String key, String value) {
         pathList.put(key, value);
         pathsSaveProperties();
+        
+        if(key.equals("p_ScreenShot")) ginterface.logNetInfo("Zaktualizowano folder na zrzuty ekranu: " + (String) pathList.get("p_ScreenShot") + ") \n");
 
     }
 
@@ -102,6 +110,9 @@ public class Services {
             properties.putAll(appList);
             properties.store(out, null);
             out.close();
+            
+            ginterface.logNetInfo("Zapisano ustawienia dla aplikacji \n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,6 +126,8 @@ public class Services {
             properties.putAll(commandList);
             properties.store(out, null);
             out.close();
+            
+            ginterface.logNetInfo("Zapisano ustawienia dla komend \n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -128,6 +141,8 @@ public class Services {
             properties.putAll(pathList);
             properties.store(out, null);
             out.close();
+            
+            ginterface.logNetInfo("Zapisano ustawienia dla folderów \n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,9 +186,14 @@ public class Services {
             }
 
             in.close();
+            
+            // KOMENTARZE PONIŻEJ DO USUNIĘCIA, JEŻELI WSZYSTKO BĘDZIE DZIAŁAĆ
+            // pathScreenshot = pathList.get("p_ScreenShot");
+            
+            System.out.println("Zrzuty ekranu: " + pathList.get("p_ScreenShot"));
+            
 
-            pathScreenshot = pathList.get("p_ScreenShot");
-            System.out.println(pathScreenshot);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,6 +202,10 @@ public class Services {
     public static void muteSystemVolume(int value) {
         try {
             pr = rt.exec(path + " mutesysvolume " + value);
+            
+            if(value == 0) ginterface.logNetInfo("Włączono dźwięki systemowe \n");
+            else if(value == 1) ginterface.logNetInfo("Wyłączono dźwięki systemowe \n");
+            else if(value == 2) ginterface.logNetInfo("Przełączono dźwięki systemowe \n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,6 +228,8 @@ public class Services {
 
             try {
                 pr = rt.exec(path + " setsysvolume " + endVolume);
+                
+                ginterface.logNetInfo("Ustawiono głośność w systemie na " + volume + "% \n");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -224,6 +250,9 @@ public class Services {
         } else {
             try {
                 pr = rt.exec(path + " setbrightness " + value);
+                
+                ginterface.logNetInfo("Ustawiono jasność ekranu na " + value + "% \n");
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -233,7 +262,9 @@ public class Services {
     public static void logOffCurrentUser() {
         try {
             pr = rt.exec(path + " exitwin logoff");
-
+            
+            ginterface.logNetInfo("Wylogowano użytkownika \n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -242,6 +273,8 @@ public class Services {
     public static void computerStandby() {
         try {
             pr = rt.exec(path + " standby");
+            
+            ginterface.logNetInfo("Przełączono komputer w stan czuwania \n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -251,7 +284,9 @@ public class Services {
     public static void computerRestart() {
         try {
             pr = rt.exec(path + " exitwin reboot");
-
+            
+            ginterface.logNetInfo("Restart systemu \n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -260,20 +295,25 @@ public class Services {
     public static void computerTurnOff() {
         try {
             pr = rt.exec(path + " exitwin poweroff");
+            
+            ginterface.logNetInfo("Wyłączanie systemu \n");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // KOMENTARZE PONIŻEJ DO USUNIĘCIA, JEŻELI WSZYSTKO BĘDZIE DZIAŁAĆ
     //	ex. C:\Users\KR\Desktop\pz2017-zrzuty
-//	Statyczna sciezka do folderu ze zrzutami ekranu (potencjalnie konfigurowalna z GUI)
-    static String pathScreenshot;
+    //	Statyczna sciezka do folderu ze zrzutami ekranu (potencjalnie konfigurowalna z GUI)
+    //static String pathScreenshot;
 
     public void saveScreenshot() {
         try {
-            pr = rt.exec(path + " savescreenshot " + pathScreenshot + "zrzut_~$currdate.MM_dd_yyyy$-~$currtime.HH_mm_ss$.png");
-			ginterface.logNetInfo("Zrzut zrobiony!\n");
+            pr = rt.exec(path + " savescreenshot " + pathList.get("p_ScreenShot") + "zrzut_~$currdate.MM_dd_yyyy$-~$currtime.HH_mm_ss$.png");
+			
+            ginterface.logNetInfo("Zrzut zrobiony!\n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -282,6 +322,8 @@ public class Services {
     public static void monitorStandby() {
         try {
             pr = rt.exec(path + " monitor async_off");
+            
+            ginterface.logNetInfo("Przełączenie monitora w stan czuwania \n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -289,12 +331,13 @@ public class Services {
     }
 
     //	Statyczna sciezka do folderu z plikiem .exe konkretnej apki (potencjalnie konfigurowalna z GUI)
-//	Wystarczy podac sama nazwe pliku w stringu, bez .exe
-    static String pathProgram = "F:/Steam/";
+	//	Wystarczy podac sama nazwe pliku w stringu, bez .exe
+	//  static String pathProgram = "F:/Steam/";
 
     public void runProgram(String appName) {
         try {
             pr = rt.exec(path + " exec show " + (String) appList.get(appName));
+            
 			ginterface.logNetInfo("Uruchomiono program " + appName + "\n");
 
         } catch (IOException e) {
@@ -305,6 +348,7 @@ public class Services {
     public void stopProgram(String appName) {
         try {
             pr = rt.exec(path + " killprocess " + appName + ".exe"); //closeprocess?
+            
 			ginterface.logNetInfo("Zatrzymano proces " + appName + "\n");
 
         } catch (IOException e) {
@@ -340,6 +384,9 @@ public class Services {
                     + commandList.get("c_Run") + "~t" + " <nazwa aplikacji>" + "~t(uruchom)" + "~n"
                     + commandList.get("c_Stop") + "~t" + " <nazwa procesu>" + "~t(zatrzymaj)" + "~n"
                     + "\" \"Komendy\"");
+            
+            ginterface.logNetInfo("Wyświtlenie dostępnych poleceń \n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -393,7 +440,7 @@ public class Services {
                 e.printStackTrace();
             }
 
-			ginterface.logNetInfo("Nie rozpoznano komendy!\n");
+			ginterface.logNetInfo("Nie rozpoznano komendy: " + command + "\n");
         }
     }
 

@@ -22,20 +22,15 @@ import java.util.logging.Logger;
 public class DatagramReceiver implements Runnable{
     private DatagramSocket dSocket;
     private DatagramPacket packet;
-    InetAddress localhost;
-    byte[] buffer = new byte[32];
+    private byte[] buffer = new byte[32];
     
     @Override
     public void run() {
         
         try {
-            localhost  = InetAddress.getLocalHost();
             dSocket = new DatagramSocket(30111);
             dSocket.setBroadcast(true);
-
         } catch (SocketException ex) {
-            Logger.getLogger(DatagramReceiver.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnknownHostException ex) {
             Logger.getLogger(DatagramReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
         

@@ -23,10 +23,9 @@ public class Serwer {
     private final int privateKey = 42;
     public int publicKey;
     int token;
-    byte[] msg;
     ServerSocket serverSock;
     int port = 30110;
-    Services services;;
+    Services services;
     Gui ginterface;
 
     boolean checkToken(int token){
@@ -65,9 +64,9 @@ public class Serwer {
     }
    
     void connection() throws IOException {
+
         services = new Services();
         services.loadProperties();
-		
 
       InetAddress localhost = InetAddress.getLocalHost();
       

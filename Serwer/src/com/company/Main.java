@@ -16,7 +16,6 @@ import java.io.IOException;
 public class Main {
 
       public static void main(String[] args) throws Exception{
-
           //////tworzenie wątku//
           Runnable runner = new DatagramReceiver();
           Thread thread= new Thread(runner);

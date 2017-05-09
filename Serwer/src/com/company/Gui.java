@@ -27,13 +27,15 @@ public class Gui {
     private JButton zapiszButton;
     private JTextArea textArea2;
     private JTextArea textArea3;
+    private JTabbedPane tabbedPane1;
+    private JButton pomocButton;
 
 
     Gui() {
         oProgramieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               JOptionPane.showMessageDialog(oProgramieButton, "Serwer GUI by Szczupakowski.", "O programie", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Serwer GUI by Szczupakowski.", "O programie", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         glownyWidokButton.addActionListener(new ActionListener() {
@@ -79,6 +81,12 @@ public class Gui {
                     JOptionPane.showMessageDialog(null, "Musisz podać wszystkie dane!", "Błąd!", JOptionPane.ERROR_MESSAGE);
             }
 
+        });
+        pomocButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(null, " W oknie konfiguracji można dodać nowe: komendę, program lub ścieżkę. \n Wybieramy z listy to, co chcemy dodać, po czym podajemy nazwę oraz wartość danego ustawienia. \n Zatwierdzamy przyciskiem \"Zapisz\".", "Pomoc ustawień", JOptionPane.INFORMATION_MESSAGE);
+            }
         });
     }
 
