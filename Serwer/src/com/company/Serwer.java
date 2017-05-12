@@ -43,7 +43,11 @@ public class Serwer {
 
     void loadGUI(){
         ginterface = new Gui();
-        ginterface.show();
+        try {
+            ginterface.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         services.ginterface=ginterface;
         System.out.println("Dostępne komendy w oparciu o zapisane ustawienia:");
         for (String key : services.commandList.keySet()) {
