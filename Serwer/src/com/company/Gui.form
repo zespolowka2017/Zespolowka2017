@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="768" height="240"/>
+      <xy x="20" y="20" width="850" height="618"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -36,6 +36,7 @@
                       <columns value="20"/>
                       <editable value="false"/>
                       <enabled value="true"/>
+                      <font size="20"/>
                       <rows value="10"/>
                       <text value=""/>
                       <toolTipText value="Log serwera"/>
@@ -65,7 +66,10 @@
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <enabled value="false"/>
+                  <font size="20"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="261b0" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
@@ -73,6 +77,9 @@
                     <properties>
                       <columns value="20"/>
                       <editable value="false"/>
+                      <enabled value="true"/>
+                      <font size="20"/>
+                      <lineWrap value="false"/>
                       <rows value="10"/>
                       <toolTipText value="Lista wszystkich komend serwera"/>
                     </properties>
@@ -91,6 +98,7 @@
                     <properties>
                       <columns value="20"/>
                       <editable value="false"/>
+                      <font size="20"/>
                       <rows value="10"/>
                       <toolTipText value="Lista wszystkich aplikacji serwera"/>
                     </properties>
@@ -109,6 +117,7 @@
                     <properties>
                       <columns value="20"/>
                       <editable value="false"/>
+                      <font size="20"/>
                       <rows value="10"/>
                       <toolTipText value="Lista wszystkich ścieżek serwera"/>
                     </properties>
@@ -287,7 +296,9 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font size="18"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="796b3" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -300,36 +311,52 @@
             <children>
               <component id="d4618" class="javax.swing.JButton" binding="glownyWidokButton">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="350" height="140"/>
+                    <maximum-size width="350" height="140"/>
+                  </grid>
                 </constraints>
                 <properties>
-                  <text value="Informacje: połączenie, komendy"/>
+                  <font size="24" style="1"/>
+                  <text value="Start"/>
                   <toolTipText value="Tutaj uzyskasz log połączenia, oraz informacje o wszystkich odebranych komendach przez serwer"/>
                 </properties>
               </component>
               <component id="25c68" class="javax.swing.JButton" binding="komendyButton" default-binding="true">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="350" height="140"/>
+                    <maximum-size width="350" height="140"/>
+                  </grid>
                 </constraints>
                 <properties>
+                  <font size="24" style="1"/>
                   <text value="Wyświetl ustawienia"/>
                   <toolTipText value="Tu uzyskasz informacje o wszystkich możliwych ustawieniach serwera"/>
                 </properties>
               </component>
               <component id="220f" class="javax.swing.JButton" binding="Konfiguracja">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="350" height="140"/>
+                    <maximum-size width="350" height="140"/>
+                  </grid>
                 </constraints>
                 <properties>
+                  <font size="24" style="1"/>
                   <text value="Konfiguracja serwera"/>
                   <toolTipText value="Tutaj możesz skonfigurowac serwer dodając nową ścieżkę, program czy koemndę"/>
                 </properties>
               </component>
               <component id="19ca0" class="javax.swing.JButton" binding="oProgramieButton" default-binding="true">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="350" height="140"/>
+                    <maximum-size width="350" height="140"/>
+                  </grid>
                 </constraints>
                 <properties>
+                  <font size="24" style="1"/>
                   <text value="Informacje o programie"/>
                   <toolTipText value="Tu uzyskasz informacje o tym projekcie"/>
                 </properties>

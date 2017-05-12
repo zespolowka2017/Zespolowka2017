@@ -34,12 +34,6 @@ public class Serwer {
         if(token == publicKey - privateKey)return false;
         else return true;
     }
-    public void printVars(Gui ginterface){
-        ginterface.clearVarsView();
-        for (String key : services.commandList.keySet()) ginterface.listCommands(key + " -> " + services.commandList.get(key));
-        for (String key : services.appList.keySet()) ginterface.listApps(key + " -> " + services.appList.get(key));
-        for (String key : services.pathList.keySet()) ginterface.listPaths(key + " -> " + services.pathList.get(key));
-    }
 
     void loadGUI(){
         ginterface = new Gui();
@@ -56,7 +50,7 @@ public class Serwer {
         }
 
 //        wywołaj f
-        printVars(ginterface);
+        ginterface. fillSettingsView();
 
 
         ginterface.logNetInfo("Nasłuchiwanie na:\n");

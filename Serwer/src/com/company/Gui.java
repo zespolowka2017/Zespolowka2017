@@ -43,15 +43,25 @@ public class Gui {
 
 
     Gui() {
+        TextAreaNetLog.setAutoscrolls(true);
+        glownyWidokButton.setEnabled(false);
         oProgramieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                oProgramieButton.setEnabled(false);
+                komendyButton.setEnabled(true);
+                glownyWidokButton.setEnabled(true);
+                Konfiguracja.setEnabled(true);
                 JOptionPane.showMessageDialog(null, "Link do strony: https://aleks-2.mat.umk.pl/pz2016/zesp09/. \n Autorzy aplikacji: \n WITTKOWSKA KATARZYNA \n STRASZEWSKI SEBASTIAN \n STĘPIŃSKI HUBERT \n MARKUSZEWSKI MATEUSZ \n RUDZIŃSKI KRYSTIAN \n SZCZUPAKOWSKI DAWID.", "O programie", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         glownyWidokButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                oProgramieButton.setEnabled(true);
+                komendyButton.setEnabled(true);
+                glownyWidokButton.setEnabled(false);
+                Konfiguracja.setEnabled(true);
                 CardLayout cd = (CardLayout) CardView.getLayout();
                 cd.show(CardView, "Card1");
 
@@ -60,6 +70,10 @@ public class Gui {
         komendyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                oProgramieButton.setEnabled(true);
+                komendyButton.setEnabled(false);
+                glownyWidokButton.setEnabled(true);
+                Konfiguracja.setEnabled(true);
                 CardLayout cd = (CardLayout) CardView.getLayout();
                 cd.show(CardView, "Card2");
             }
@@ -67,6 +81,10 @@ public class Gui {
         Konfiguracja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                oProgramieButton.setEnabled(true);
+                komendyButton.setEnabled(true);
+                glownyWidokButton.setEnabled(true);
+                Konfiguracja.setEnabled(false);
                 CardLayout cd = (CardLayout) CardView.getLayout();
                 cd.show(CardView, "Card3");
                 fillCombo(Services.commandList, comboBox3);
@@ -186,7 +204,7 @@ public class Gui {
         return retValue;
     }
 
-    private void fillSettingsView(){
+    public void fillSettingsView(){
         clearVarsView();
         for (String key : Services.commandList.keySet()) listCommands(key + " -> " + Services.commandList.get(key));
         for (String key : Services.appList.keySet()) listApps(key + " -> " + Services.appList.get(key));
@@ -205,6 +223,7 @@ public class Gui {
 
     void logNetInfo(String data) {
         TextAreaNetLog.append(data);
+
     }
 
     public void listCommands(String data) {
