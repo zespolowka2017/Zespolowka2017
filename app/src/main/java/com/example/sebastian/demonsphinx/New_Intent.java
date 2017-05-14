@@ -68,23 +68,25 @@ public class New_Intent extends Activity {
 
         player = sharedPreferences.getString("Multimedia"," "  ).toLowerCase();
 
-        vPlus=sharedPreferences.getString("Multimedia2"," "  ).toLowerCase();
-        vMinus=sharedPreferences.getString("Multimedia3"," "  ).toLowerCase();
+        vPlus=sharedPreferences.getString("Multimedia3"," "  ).toLowerCase();
+        vMinus=sharedPreferences.getString("Multimedia2"," "  ).toLowerCase();
 
-        percentagePowerPlus = sharedPreferences.getInt("Multimedia1",1  );
-        percentagePowerMinus = sharedPreferences.getInt("Multimedia4",1  );
+        percentagePowerPlus = sharedPreferences.getInt("Multimedia4",1  );
+        percentagePowerMinus = sharedPreferences.getInt("Multimedia1",1  );
 
         Bundle b = getIntent().getExtras();
         command = b.getString("Polecenie");
-
+Log.d("Value",order[0]+"  "+order[1]+"  "+order[2]+"  "+order[3]+"  "+order[4]+"  "+order[5]+"  "+order[6]+"  "+player+"  "+vPlus+"  "+vMinus);
         execute();
     }
 
     private void execute() {
         command = command.toLowerCase();
 
-        String[] tab = command.split(" ");
+        Log.d("new Intent",command);
 
+        String[] tab = command.split(" ");
+Log.d("Tab[0]",tab[0]);
         if(tab[0].equals(order[0])) {
             call(tab);
         }

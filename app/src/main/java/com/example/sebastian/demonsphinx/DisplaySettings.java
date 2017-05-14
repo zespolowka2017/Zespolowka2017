@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *Klasa odpowiada za wyświetlanie aktywnosci do edycji opcji oraz
@@ -17,6 +21,7 @@ import android.widget.Toast;
  */
 
 public class DisplaySettings extends AppCompatActivity  {
+
 
     /**
      * Zmienne przechowywujące referencje do pół tekstowych w widoku display_settings.xml.
@@ -43,6 +48,9 @@ public class DisplaySettings extends AppCompatActivity  {
      * Obiekt pozwalający na połączenie z plikiem konfiguracyjnym.
      */
     private SharedPreferences sharedPreferences;
+    private Map<String,?> preferencesFile=new HashMap<>();
+
+
 
     /**
      *Tworzenie widoku z godnie z wyborem opcji przez użytkownika przeznaconego do edycji ustawień aplikacji.
@@ -57,7 +65,16 @@ public class DisplaySettings extends AppCompatActivity  {
         /**
          * Otworzenie połączenia z plikiem konfiguracyjnym.
          */
+
         sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE);
+
+        preferencesFile=sharedPreferences.getAll();
+        for(Map.Entry<String,?> entry: preferencesFile.entrySet()){
+            Log.d("File:","Klucz"+entry.getKey()+"Wartość"+entry.getValue());
+        }
+
+
+
         /**
          * Przypisanie referencji do pol tekstowych
          */
@@ -78,6 +95,30 @@ eValue2.setFocusable(true);
         /**
          * Walidacja wpisywanego tekstu
          */
+        eValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                 if(s.length()<=1){
+                    eValue2.setError("Zbyt krótkie słowo !!");
+                }
+
+
+            }
+
+
+
+        });
+
         eValue2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,21 +127,32 @@ eValue2.setFocusable(true);
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    if (s.length() ==3) {
+                if (s.toString().matches("^[a-z]+$"))
 
-                        eValue2.setError("Wprowadź wartość od 0-100");
-                    }
-                }
-                catch(NumberFormatException e)
                 {
-
+                    eValue2.setError(null);
+                }
+                else{
+                    eValue2.setError("Słowo nie może zawierać spacji !!");
                 }
             }
 
 
             @Override
             public void afterTextChanged(Editable s){
+
+                for(Map.Entry<String,?> entry: preferencesFile.entrySet()){
+                    if(entry.getValue().toString().equals(eValue2.getText().toString())){
+                        eValue2.setError("Podana wartość istnieje !!");
+                        Log.d("dd",entry.getValue().toString());
+                    }
+                    else{
+                        eValue2.setError(null);
+                    }
+                }
+                if(s.length()<=1){
+                    eValue2.setError("Zbyt krótkie słowo !!");
+                }
         }
 
         });
@@ -190,7 +242,7 @@ eValue2.setFocusable(true);
 
         }
         else if (key == 6) {
-            setTitle("MultimediaPlus");
+            setTitle("MultimediaMinus");
 
             txt2.setText(sharedPreferences.getString("Multimedia", " "));
             txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia1", 1)));
@@ -203,7 +255,7 @@ eValue2.setFocusable(true);
 
         }
         else if (key == 7) {
-            setTitle("MultimediaMinus");
+            setTitle("MultimediaPlus");
 
             txt2.setText(sharedPreferences.getString("Multimedia", " "));
             txt4.setText(String.valueOf(sharedPreferences.getInt("Multimedia4", 1)));

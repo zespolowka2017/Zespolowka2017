@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sebastian.demonsphinx.Adapters.AdapterDisplayComputers;
@@ -98,20 +99,7 @@ public class ConnectionView extends AppCompatActivity {
         progressDialog.setMessage("Szukam dostępnych komputerów w sieci...");
         progressDialog.show();
 
+
     }
 
-
-    public void Conect(View view) {
-
-        SharedPreferences sharedPreferences=getSharedPreferences("Settings",MODE_PRIVATE);
-        SharedPreferences.Editor editor= sharedPreferences.edit();
-
-        AdapterDisplayComputers adapter=new AdapterDisplayComputers();
-        editor.putString("NAME", adapter.Name);
-
-       editor.putString("IP",adapter.IP);
-        //editor.commit();
-        editor.apply();
-        Toast.makeText(this,adapter.IP+ adapter.Name,Toast.LENGTH_LONG).show();
     }
-}

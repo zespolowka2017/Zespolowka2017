@@ -50,15 +50,17 @@
         android:id="@+id/setValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:textColor="#B3FFFFFF"
-        android:textColorHint="#ffc400"
-        android:hint="Wprowadź słowo klucz"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="17dp"
         android:layout_above="@+id/setValue3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:backgroundTint="#FFFFFF"
+        android:maxLength="15"
+        android:hint="Wprowadź klucz"
+        android:inputType="textPersonName"
+        android:textColor="#B3FFFFFF"
+        android:textColorHint="#ffc400" />
 
     <EditText
         android:id="@+id/setValue1"
@@ -68,6 +70,7 @@
         android:ems="10"
         android:textColor="#B3FFFFFF"
         android:hint="O ile %"
+        android:backgroundTint="#FFFFFF"
         android:inputType="numberDecimal"
         android:maxLength="2"
         android:layout_alignBaseline="@+id/setValue"
@@ -100,8 +103,10 @@
         android:layout_height="wrap_content"
         android:textColorHint="#ffc400"
         android:ems="10"
+        android:maxLength="15"
         android:hint="Wprowadź klucz"
         android:textColor="#B3FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:inputType="textPersonName"
         android:layout_alignBaseline="@+id/setValue"
         android:layout_alignBottom="@+id/setValue"
@@ -118,10 +123,13 @@
         android:ems="10"
         android:textColor="#B3FFFFFF"
         android:hint="O ile %"
+        android:backgroundTint="#FFFFFF"
         android:inputType="numberDecimal"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/value1"
+        android:layout_toStartOf="@+id/value1" />
 
     <TextView
         android:id="@+id/value3"

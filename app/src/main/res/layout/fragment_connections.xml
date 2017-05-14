@@ -20,6 +20,8 @@
         android:hint="Wprowadź nazwę urządzenia"
         android:textColorHint="#ffc400"
         android:layout_alignParentTop="true"
+        android:textColor="#B3FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:layout_marginTop="115dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -51,10 +53,11 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:ems="10"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#B3FFFFFF"
         android:hint="Wprowadz adres IP"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="?android:attr/textColorHintInverse"
         android:textColorHint="#ffc400"
         android:textSize="18sp" />
 
