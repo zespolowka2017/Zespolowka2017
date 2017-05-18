@@ -16,8 +16,10 @@ import java.util.logging.Logger;
 //import static jdk.nashorn.internal.objects.ArrayBufferView.buffer;
 
 /**
- *
- * @author Laptokodonozozaur
+ * Tworzy   gniazdo   bezpołączeniowe   i   nasłuchuje   na
+ * broadcaście. Gdy otrzyma pakiet pobiera adres ip z jakiego przybył i wysyła na ten
+ * adres swoją nazwę komputera i adres ip.
+ * @author Mateusz Markuszewski
  */
 public class DatagramReceiver implements Runnable{
     private DatagramSocket dSocket;
@@ -35,7 +37,7 @@ public class DatagramReceiver implements Runnable{
         }
         
         while(true){
-       
+            //po otrzymaniu wiadomości z broadcastu wysyła pakiet z nazwą komputera do nadawcy
             try {               
                 packet = new DatagramPacket(buffer,buffer.length);         
                 dSocket.receive(packet);           

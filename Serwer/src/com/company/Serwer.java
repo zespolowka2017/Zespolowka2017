@@ -16,9 +16,14 @@ import java.net.Socket;
 
 
 /**
- *
- * @author Laptokodonozozaur
+ *Tworzy obiekty klas odpowiedzialnych za interfejs i usługi, które świadczy serwer.
+ *Następnie w pętli nasłuchuje czeka na połączenie połączeniowe. Gdy połączy się z
+ *klientem zapisuje liczby odpowiedzialne za jego weryfikację. Odbierając wiadomość
+ *zawierającą komendę   weryfikuje klienta a następnie jeżeli przeszedł weryfikację
+ *wykonuje komendę.
+ * @author Mateusz Markuszewski
  */
+
 public class Serwer {
     private final int privateKey = 42;
     public int publicKey;
@@ -28,14 +33,20 @@ public class Serwer {
     Services services;
     Gui ginterface;
 
+    /**
+     * metoda sprawdzająca czy wiadomość jest od urządzenia które zainicjowało połączenie
+     * @param token zmienna wysyłana wraz z wiadomością w celu
+     * @return
+     */
     boolean checkToken(int token){
         System.out.println(publicKey);
         System.out.println(token);
-        if(token == publicKey - privateKey)return false;
-        else return true;
+        if(token == publicKey - privateKey)return true;
+        else return false;
     }
 
     void loadGUI(){
+
         ginterface = new Gui();
         try {
             ginterface.show();
@@ -49,50 +60,49 @@ public class Serwer {
             System.out.println(services.commandList.get(key));
         }
 
-//        wywołaj f
         ginterface. fillSettingsView();
-
-
         ginterface.logNetInfo("Nasłuchiwanie na:\n");
         ginterface.logNetInfo("-> IP: " + serverSock.getInetAddress().toString() + "\n");
         ginterface.logNetInfo("-> Port: " + port + "\n");
         ginterface.logNetInfo("Log:\n");
 
-
     }
-   
+
+    /**
+     * odpowiedzialna   na   nawiązanie   połączenia   i   odbieranie
+     * wiadomości
+     * @throws IOException
+     */
     void connection() throws IOException {
 
         services = new Services();
         services.loadProperties();
 
-      InetAddress localhost = InetAddress.getLocalHost();
-      
-      InetSocketAddress isa = new InetSocketAddress(localhost.getHostAddress(), port);
-      System.out.print(localhost.getHostAddress());
+        InetAddress localhost = InetAddress.getLocalHost();
+        InetSocketAddress isa = new InetSocketAddress(localhost.getHostAddress(), port);
+        System.out.print(localhost.getHostAddress());
     
         try {
             serverSock = new ServerSocket();
             serverSock.bind(isa);
-            boolean serverIsRunning = true;
             loadGUI();
-           
+            ginterface.logNetInfo("Czekam na komendę...\n");
+            //ginterface.logNetInfo("Połączono\n");
             while(true){
-                ginterface.logNetInfo("Czekam na połączenie...");
+                //oczekiwanie na połączenie
                 Socket connection = serverSock.accept();
-                ginterface.logNetInfo("Połączono\n");
                 InputStream sockIn = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(sockIn));
                 publicKey = Integer.valueOf(br.readLine());
                 
-                if(checkToken(Integer.valueOf(br.readLine()))){
+                if(!checkToken(Integer.valueOf(br.readLine()))){
                     ginterface.logNetInfo("Wykryto nieautoryzowane połączenie\n");
                     continue;
                 }
                 while(!connection.isClosed()){
-                   
+                   //oczekiwanie na wiadomość
                    try{                      
-                        if(checkToken(Integer.valueOf(br.readLine()))){
+                        if(!checkToken(Integer.valueOf(br.readLine()))){
                             ginterface.logNetInfo("Wykryto nieautoryzowane połączenie\n");
                             continue;
                         }
@@ -108,7 +118,7 @@ public class Serwer {
                        continue;
                    }
                 }
-                ginterface.logNetInfo("Połączenie zostało zerwane\n");
+
                 connection.close();
                         
             }          

@@ -10,17 +10,17 @@ import java.io.IOException;
 
 /**
  *
- * @author Laptokodonozozaur
+ * @author Mateusz Markuszewski
  */
 
 public class Main {
 
       public static void main(String[] args) throws Exception{
-          //////tworzenie wątku//
+          //tworzenie wątku nasłuchującego na broadcast
           Runnable runner = new DatagramReceiver();
           Thread thread= new Thread(runner);
           thread.start();
-          ///serwer///
+          //serwer
           Serwer server = new Serwer();
           server.connection();
 

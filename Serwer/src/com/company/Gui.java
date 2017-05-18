@@ -156,9 +156,14 @@ public class Gui {
                 if (comboBox1.getSelectedIndex() == 2) {
                     fc.setAcceptAllFileFilterUsed(false);
                     fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+                    if (fc.showOpenDialog(ConfigView) == JFileChooser.APPROVE_OPTION)
+                        WartoscTextField.setText(String.valueOf(fc.getSelectedFile()) + "\\");
                 }
-                if (fc.showOpenDialog(ConfigView) == JFileChooser.APPROVE_OPTION)
-                    WartoscTextField.setText(String.valueOf(fc.getSelectedFile()));
+                else if(comboBox1.getSelectedIndex() == 1) {
+                    if (fc.showOpenDialog(ConfigView) == JFileChooser.APPROVE_OPTION)
+                        WartoscTextField.setText(String.valueOf(fc.getSelectedFile()));
+                }
             }
         });
         usunButton.addActionListener(new ActionListener() {
